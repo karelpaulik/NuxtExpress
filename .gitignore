@@ -1,0 +1,31 @@
+# root
+node_modules/
+
+# server
+server/node_modules/
+
+# client
+# # Nuxt dev/build outputs
+# client/.output
+# client/.data/
+# client/.nuxt
+# client/.nitro
+# client/.cache
+# client/dist
+
+# Node dependencies
+client/node_modules
+
+# # Logs
+# client/logs
+# client/*.log
+
+# # Misc
+# client/.DS_Store
+# client/.fleet
+# client/.idea
+
+# # Local env files
+# client/.env
+# client/.env.*
+# client/!.env.example
