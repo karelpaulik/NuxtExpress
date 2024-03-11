@@ -14,7 +14,12 @@
     "@vueuse/core": "^10.7.2",
     "@vueuse/nuxt": "^10.7.2",
     "nuxt": "^3.7.4",
+    "nuxt-quasar-ui": "^2.0.7",
     "vue": "^3.3.4",
     "vue-router": "^4.2.5"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.16.9",
+    "quasar": "^2.14.7"
   }
 }

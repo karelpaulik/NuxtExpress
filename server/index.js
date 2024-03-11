@@ -15,16 +15,16 @@ var corsOptions = {
     //optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
   }
 
-  const multer = require('multer');
-  const storage = multer.diskStorage({
-      destination: function (req, file, cb) {
-        cb(null, 'uploads/')
-      },
-      filename: function (req, file, cb) {
-        cb(null, Date.now() + '_' + file.originalname)
-      }
-    })
-  const upload = multer({ storage: storage })
+//   const multer = require('multer');
+//   const storage = multer.diskStorage({
+//       destination: function (req, file, cb) {
+//         cb(null, 'uploads/')
+//       },
+//       filename: function (req, file, cb) {
+//         cb(null, Date.now() + '_' + file.originalname)
+//       }
+//     })
+//   const upload = multer({ storage: storage })
 
 app.use(express.json());
 app.use(cors(corsOptions));
@@ -71,6 +71,6 @@ const requireAdminHandler = (req, res, next) => {
 require('./modules/helpers.js')(app, User, bcrypt, requireAuthHandler, requireAdminHandler)
 require('./modules/user.js')(app, User, bcrypt)
 require('./modules/auth.js')(app, User, bcrypt)
-require('./modules/player.js')(app, Player, File, upload)
+require('./modules/player.js')(app, Player, File)
 
 app.listen(port, () => {console.log(`server listening on port: ${port}`)});

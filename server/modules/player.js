@@ -1,4 +1,4 @@
-module.exports = function(app, Player, File, upload) {
+module.exports = function(app, Player, File ) {
 
     // const express = require('express');
     // const cors = require('cors');
@@ -7,17 +7,29 @@ module.exports = function(app, Player, File, upload) {
     // const port = 5000;
     
     //const { Player, File } = require('../models/templates/modelsMongoose.js');
-    
-    // const multer = require('multer');
-    // const storage = multer.diskStorage({
-    //     destination: function (req, file, cb) {
-    //       cb(null, 'uploads/')
-    //     },
-    //     filename: function (req, file, cb) {
-    //       cb(null, Date.now() + '_' + file.originalname)
-    //     }
-    //   })
-    // const upload = multer({ storage: storage })
+   
+    const fs = require('fs');
+
+    const folderName = 'uploads/players/';
+
+    try {
+    if (!fs.existsSync(folderName)) {
+        fs.mkdirSync(folderName);
+    }
+    } catch (err) {
+    console.error(err);
+    }
+
+    const multer = require('multer');
+    const storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+          cb(null, folderName)
+        },
+        filename: function (req, file, cb) {
+          cb(null, Date.now() + '_' + file.originalname)
+        }
+      })
+    const upload = multer({ storage: storage })
     
     // app.use(express.json());
     // app.use(cors());

@@ -1,5 +1,6 @@
 const { Query } = require("mongoose");
 const mongoose = require("mongoose");
+//const fs = require('fs');
 
 const userSchema = new mongoose.Schema({
     email: {type: String, index: true, unique: true},

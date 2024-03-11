@@ -8,6 +8,13 @@
     <div><NuxtLink to="/userAuth/logout">logout</NuxtLink></div>
     <div><NuxtLink to="/signup">Signup</NuxtLink></div>
     <a :href="`${runtimeConfig.public.baseURL}/expresslogin`">expressjs login - zadní vrátka</a>
+    <div>---------------</div>
+    <div><NuxtLink to="/player/">index</NuxtLink></div>
+    <div><NuxtLink to="/player/getall">getall</NuxtLink></div>
+    <div><NuxtLink to="/player/getspec">getspec</NuxtLink></div>
+    <div><NuxtLink to="/player/insert">insert</NuxtLink></div>
+    <div><NuxtLink to="/player/delete">delete</NuxtLink></div>
+    <div>---------------</div>
     <NuxtPage />
   </div>
 </template>
@@ -47,3 +54,9 @@
 //   });
 // }
 </script>
+
+<style>
+body {
+  background-color: gray;
+}
+</style>
