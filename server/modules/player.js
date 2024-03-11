@@ -6,9 +6,9 @@ module.exports = function(app ) {
     // const app = express();
     // const port = 5000;
     
-    //const { Player, File } = require('../models/templates/modelsMongoose.js');
+    //const { Player, PlayerFile } = require('../models/templates/modelsMongoose.js');
 
-    const { Player, File } = require('../models/modelsMongoose.js');
+    const { Player, PlayerFile } = require('../models/modelsMongoose.js');
    
     const fs = require('fs');
 
@@ -47,7 +47,7 @@ module.exports = function(app ) {
         try {
             const p = await Player.create(req.body);
             for (let item of req.files) {
-                const f = await File.create(item);
+                const f = await PlayerFile.create(item);
                 //await f.setPlayer(p);   //Toto je vložení vazby v sequelize
                 await p.files.push(f._id);
                 await p.save();
@@ -94,17 +94,17 @@ module.exports = function(app ) {
     });
     //------------------------------------------------------------------------
     app.get('/file', async(req, res) => {
-        const f = await File.find().exec();
+        const f = await PlayerFile.find().exec();
         res.send(f);
     });
     
     app.get('/file/:id', async(req, res) => {
-        const f = await File.findOne({_id: req.params.id}).exec();
+        const f = await PlayerFile.findOne({_id: req.params.id}).exec();
         res.send(f);
     });
     
     app.delete('/file/:id', async(req, res) => {
-        const f = await File.findOne({_id: req.params.id}).exec();
+        const f = await PlayerFile.findOne({_id: req.params.id}).exec();
         if (f) {   
             await f.deleteOne();  
         }

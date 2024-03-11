@@ -27,7 +27,7 @@ const playerSchema = new mongoose.Schema({
     city: [String],
     prefColor: String,
     prefShape: String,
-    files: [{type: mongoose.Schema.Types.ObjectId, ref: 'File'}]
+    files: [{type: mongoose.Schema.Types.ObjectId, ref: 'PlayerFile'}]
 }, {});
 //playerSchema.set('validateBeforeSave', false);  //toto vypne validaci
 
@@ -71,17 +71,17 @@ playerSchema.pre('deleteOne', {document: true, query: false}, async function(nex
     //TOTO FUNGUJE, ALE NA CELKEM DOST ŘÁDKŮ
     for (let file of this.files) {
         //1. možnost
-        let f = await File.findById(file);
+        let f = await PlayerFile.findById(file);
         await f.deleteOne();                  //Buď     //middleware: document middleware
-        // await File.deleteOne({ _id: file });    //Nebo (funguje obojí) //Pozor, middleware: query middleware
+        // await PlayerFile.deleteOne({ _id: file });    //Nebo (funguje obojí) //Pozor, middleware: query middleware
 
         //2. možnost
-        //await File.findByIdAndDelete(file);         //Taky funguje
+        //await PlayerFile.findByIdAndDelete(file);         //Taky funguje
 
     }
 
     //3. možnost - FUNGUJE, A JE JEN NA JEDNOM ŘÁDKU
-    //await File.deleteMany({ _id: this.files});
+    //await PlayerFile.deleteMany({ _id: this.files});
 
     //KTEROU METODU VYBRAT:
     //První metoda (Document middleware) má velkou výhodu i když je zde na více řádků:
@@ -95,7 +95,7 @@ const Player = mongoose.model('Player', playerSchema)
 
 //-----------------------------------------------------------------
 
-const fileSchema = new mongoose.Schema({
+const playerFileSchema = new mongoose.Schema({
     fieldname: String,
     originalname: String,
     encoding: String,
@@ -108,8 +108,8 @@ const fileSchema = new mongoose.Schema({
 
 //Tato metoda soubory nemaže.
 //Toto je zde pro ukázku, jak se pracuje s "this" uvnitř "deleteMany". Jinak než uvnitř "deleteOne".
-fileSchema.pre('deleteMany', {document: false, query: true}, async function(next) {
-    console.log('fileSchema - deleteMany------------------');
+playerFileSchema.pre('deleteMany', {document: false, query: true}, async function(next) {
+    console.log('playerFileSchema - deleteMany------------------');
     console.log('getFilter---------------------')
     console.log(this.getFilter());
 
@@ -121,8 +121,8 @@ fileSchema.pre('deleteMany', {document: false, query: true}, async function(next
 });
 
 //Tato metoda již funguje, maže soubory
-fileSchema.pre('deleteOne', {document: true, query: false}, async function(next) {
-    console.log('fileSchema - deleteOne------------------');
+playerFileSchema.pre('deleteOne', {document: true, query: false}, async function(next) {
+    console.log('playerFileSchema - deleteOne------------------');
     //console.log(this);
     const file=this;
 
@@ -141,6 +141,6 @@ fileSchema.pre('deleteOne', {document: true, query: false}, async function(next)
     next();
 });
 
-const File = mongoose.model('File', fileSchema)
+const PlayerFile = mongoose.model('PlayerFile', playerFileSchema)
 
-module.exports = { Player, File }
+module.exports = { Player, PlayerFile }
