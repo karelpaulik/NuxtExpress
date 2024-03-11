@@ -1,4 +1,4 @@
-module.exports = function(app, Player, File ) {
+module.exports = function(app ) {
 
     // const express = require('express');
     // const cors = require('cors');
@@ -7,6 +7,8 @@ module.exports = function(app, Player, File ) {
     // const port = 5000;
     
     //const { Player, File } = require('../models/templates/modelsMongoose.js');
+
+    const { Player, File } = require('../models/modelsMongoose.js');
    
     const fs = require('fs');
 

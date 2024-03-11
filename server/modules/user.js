@@ -1,4 +1,8 @@
-module.exports = function(app, User, bcrypt) {
+module.exports = function(app) {
+
+    const bcrypt = require('bcrypt'); //bcrypt -> bcryptjs?. With 'bcrypt' must be used further config inside package.json 
+    const { User } = require('../models/modelsMongoose.js');
+
     app.post('/api/user', async(req, res) => {
         //Pozor, pokud je ve schématu definováno: "unique: true", pak nestačí: const p = await User.create(req.body);
         //Nutno použít: Model.init (kde model je název konkr. objektu)

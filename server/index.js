@@ -2,12 +2,12 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
-const bcrypt = require('bcrypt'); //bcrypt -> bcryptjs?. With 'bcrypt' must be used further config inside package.json 
+//const bcrypt = require('bcrypt'); //bcrypt -> bcryptjs?. With 'bcrypt' must be used further config inside package.json 
 
 const app = express();
 const port = 5000;
 
-const { User, Player, File } = require('./models/modelsMongoose.js');
+//const { User, Player, File } = require('./models/modelsMongoose.js');
 
 var corsOptions = {
     origin: ['http://localhost:3000', 'http://localhost:5000'],
@@ -68,9 +68,9 @@ const requireAdminHandler = (req, res, next) => {
     next();
 }
 
-require('./modules/helpers.js')(app, User, bcrypt, requireAuthHandler, requireAdminHandler)
-require('./modules/user.js')(app, User, bcrypt)
-require('./modules/auth.js')(app, User, bcrypt)
-require('./modules/player.js')(app, Player, File)
+require('./modules/helpers.js')(app, requireAuthHandler, requireAdminHandler)
+require('./modules/user.js')(app)
+require('./modules/auth.js')(app)
+require('./modules/player.js')(app)
 
 app.listen(port, () => {console.log(`server listening on port: ${port}`)});

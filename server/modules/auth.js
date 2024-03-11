@@ -1,4 +1,7 @@
-module.exports = function(app, User, bcrypt) {
+module.exports = function(app) {
+
+    const bcrypt = require('bcrypt'); //bcrypt -> bcryptjs?. With 'bcrypt' must be used further config inside package.json 
+    const { User } = require('../models/modelsMongoose.js');
 
 //----------Authentification------------------------------------------------------------------------
 // app.post('/api/auth', (req, res) => {

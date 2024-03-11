@@ -1,4 +1,5 @@
-module.exports = function(app, User, bcrypt, requireAuthHandler, requireAdminHandler) {
+module.exports = function(app, requireAuthHandler, requireAdminHandler) {
+
     app.get('/', (req, res) => {
         res.send('hello from server');
     });
