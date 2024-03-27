@@ -91,6 +91,38 @@ playerSchema.pre('deleteOne', {document: true, query: false}, async function(nex
     next();
 });
 
+    playerSchema.pre('findOneAndUpdate', {document: false, query: true}, async function(next) {
+    console.log('findOneAndUpdate------------------');
+    //console.log("this: ", this);
+    console.log("this.getUpdate: ", this.getUpdate());
+    console.log("this.getFilter: ", this.getFilter());
+    console.log("this.getQuery: ", this.getQuery());
+    console.log("this.getOptions: ", this.getOptions());
+    console.log("this.getPopulatedPaths: ", this.getPopulatedPaths());
+    console.log("this.model: ", this.model());
+    console.log("----------------------------------------------");
+
+    // // Original
+    const filter = this.getFilter(); // Retrieve the query object
+    const orig = await this.model.findOne(filter).populate('files').exec();
+    console.log("orig: ", orig);
+    
+    //Update
+    const update = this.getUpdate();
+    console.log("update: ", update);
+
+    // // Compare original document with updated document
+    // const modifiedFields = [];
+    // for (const key in update) {
+    //     if (orig.files[key] !== update.files[key]) {
+    //         modifiedFields.push(key);
+    //     }
+    // }
+    // console.log('Modified fields:', modifiedFields);
+
+    next();
+});
+
 const Player = mongoose.model('Player', playerSchema)
 
 //-----------------------------------------------------------------

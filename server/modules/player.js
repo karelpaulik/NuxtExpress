@@ -77,8 +77,8 @@ module.exports = function(app ) {
     app.put('/player/:id', async(req, res) => {
         const filter = {_id: req.params.id};
         const update = req.body;
-        console.log(filter);
-        console.log(update);
+        console.log("filter: ", filter);
+        console.log("update: ", update);
         const p = await Player.findOneAndUpdate(filter, update, {
             new: true
         });
