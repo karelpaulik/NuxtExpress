@@ -38,15 +38,16 @@
 <script setup>
   import { ref }  from 'vue';
 
-  const runtimeConfig = useRuntimeConfig()
-  const pk = ref('')
-  const fileToDel = ref('')
+  const route = useRoute();
+  const runtimeConfig = useRuntimeConfig();
+  const pk = ref('');
+  const fileToDel = ref('');
 
   //const { data, refresh } = await useFetch( `/player/${pk.value}`, {  //Toto nefunguje
-  const { data: dataSpecPlayer, refresh: refreshSpecPlayer } = await useFetch( () => '/player/' + pk.value, {  
+  const { data: dataSpecPlayer, refresh: refreshSpecPlayer } = await useFetch( () => '/player/' + route.params.id, {  
     method: 'get',
     baseURL: runtimeConfig.public.baseURL,
-    immediate: false,
+    //immediate: false,
     watch: false
   });
 

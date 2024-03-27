@@ -93,17 +93,17 @@ module.exports = function(app ) {
         res.send(p);
     });
     //------------------------------------------------------------------------
-    app.get('/file', async(req, res) => {
+    app.get('/playerFile', async(req, res) => {
         const f = await PlayerFile.find().exec();
         res.send(f);
     });
     
-    app.get('/file/:id', async(req, res) => {
+    app.get('/playerFile/:id', async(req, res) => {
         const f = await PlayerFile.findOne({_id: req.params.id}).exec();
         res.send(f);
     });
     
-    app.delete('/file/:id', async(req, res) => {
+    app.delete('/playerFile/:id', async(req, res) => {
         const f = await PlayerFile.findOne({_id: req.params.id}).exec();
         if (f) {   
             await f.deleteOne();  

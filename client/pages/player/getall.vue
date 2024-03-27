@@ -24,7 +24,7 @@
           </div>
         </div>
         <button @click="fceDelThisRecord(rec._id)">Delete this record</button>
-        <button @click="fceMoveToRecord(rec._id)">Move to login</button>
+        <button @click="fceMoveToRecord(rec._id)">Move to record</button>
         <hr>
       </div>
     </div>
@@ -56,7 +56,7 @@
   }
 
   async function fceMoveToRecord(id) {
-    await navigateTo('/userAuth/login');
+    await navigateTo('/player/getspec-' + id);
   }
 
   function fceDelPicture(player, file) {
