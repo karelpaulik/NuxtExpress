@@ -51,7 +51,7 @@
     watch: false
   });
 
-  const { data: dtUpdate, refresh: refreshUpdate } = await useFetch( () => '/player/' + pk.value, {
+  const { data: dtUpdate, refresh: refreshUpdate } = await useFetch( () => '/player/' + route.params.id, {
     method: 'put',
     baseURL: runtimeConfig.public.baseURL,
     immediate: false,

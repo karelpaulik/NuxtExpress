@@ -72,12 +72,7 @@ playerSchema.pre('deleteOne', {document: true, query: false}, async function(nex
     for (let file of this.files) {
         //1. možnost
         let f = await PlayerFile.findById(file);
-        try {
-            await f.deleteOne();                  //Buď     //middleware: document middleware
-        }
-        catch(err) {
-            console.log(err)
-        } 
+        await f.deleteOne();                  //Buď     //middleware: document middleware
         // await PlayerFile.deleteOne({ _id: file });    //Nebo (funguje obojí) //Pozor, middleware: query middleware
 
         //2. možnost
