@@ -39,6 +39,7 @@ module.exports = function(app ) {
     
     //upload.single     tj. upload jednoho souboru
     //upload.array      tj. upload více souborů
+    //upload.any()      tj. zde nevadí, když neznám jak se jmenuje parametr uvnitř "upload.array('file')" - tj. když nevím, co má být místo 'file'
     //nyní asi univerzální, ponechat "upload.array"
     //pokud nepošlu žádný soubor, pak "req.files" není undefined, ale prázdné pole, tj. []
     //funguje, i pokud na klientovi není nastaveno "multiple"
@@ -93,6 +94,29 @@ module.exports = function(app ) {
         res.send(p);
     });
     //------------------------------------------------------------------------
+
+    app.post('/playerFile/:id', upload.array('file'), async(req, res) => {      //zde změna oproti "/player"
+        //console.log(req.body);        //console.log(req.file);        //console.log(req.files);
+        try {
+            //const p = await Player.create(req.body);
+            const p = await Player.findOne({_id: req.params.id});               //zde změna oproti "/player"
+
+            for (let item of req.files) {
+                const f = await PlayerFile.create(item);
+                //await f.setPlayer(p);   //Toto je vložení vazby v sequelize
+                await p.files.push(f._id);
+                await p.save();
+            }
+        } catch(err) {
+            console.log("catch blok");
+            console.log(err);
+        } finally {
+            console.log('finally blok')
+        }
+        console.log('---------------------')
+        res.send(req.body);
+    });
+
     app.get('/playerFile', async(req, res) => {
         const f = await PlayerFile.find().exec();
         res.send(f);

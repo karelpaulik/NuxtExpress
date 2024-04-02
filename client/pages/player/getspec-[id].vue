@@ -31,6 +31,16 @@
           </div>
         </div>
         <button @click="fcePokus">Pokus</button>
+
+        <q-uploader
+          :url="`${runtimeConfig.public.baseURL}/playerFile/${dataSpecPlayer._id}`"
+          label="Individual upload"
+          multiple
+          style="max-width: 300px"
+          field-name="file"
+          @uploaded="send"
+        />
+
       </div>     
     </div>
 </template>
