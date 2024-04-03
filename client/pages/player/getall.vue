@@ -20,7 +20,6 @@
           <div v-for="file in rec.files">
             <!-- <img :src="`http://localhost:5000/${file.path}`" width="400"> -->
             <img :src="`${runtimeConfig.public.baseURL}/${file.path}`" width="400">
-            <button @click="fceDelPicture(rec._id, file._id)">Delete this picture</button>
           </div>
         </div>
         <button @click="fceDelThisRecord(rec._id)">Delete this record</button>
@@ -28,31 +27,18 @@
         <hr>
       </div>
     </div>
-  </template>
+</template>
   
-  <script setup>
+<script setup>
   import {ref, reactive} from 'vue'
   const runtimeConfig = useRuntimeConfig()
-
-  let delUser = ref("");
 
   const { data: dataAllPlayer, refresh: listAllPlayer } = await useFetch('/player', {
     method: 'get',
     baseURL: runtimeConfig.public.baseURL
   });
 
-  const { data: dataDelSpecPlayer, refresh: delSpecPlayer } = await useFetch( () => '/player/' + delUser.value, {
-    method: 'delete',
-    baseURL: runtimeConfig.public.baseURL,
-    immediate: false,
-    watch: false,
-    credentials: 'include'
-  });
-
   async function fceDelThisRecord(id) {
-    //delUser.value=id;
-    //await delSpecPlayer();
-    //await listAllPlayer();
     await useDelPlayer(id);
     await listAllPlayer();
   }
@@ -60,12 +46,6 @@
   async function fceMoveToRecord(id) {
     await navigateTo('/player/getspec-' + id);
   }
-
-  function fceDelPicture(player, file) {
-    console.log("player: " + player, "file: " + file);
-  }
-
-  console.log(dataAllPlayer);
   
-  </script>
+</script>
   
