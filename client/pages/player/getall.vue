@@ -50,8 +50,10 @@
   });
 
   async function fceDelThisRecord(id) {
-    delUser.value=id;
-    await delSpecPlayer();
+    //delUser.value=id;
+    //await delSpecPlayer();
+    //await listAllPlayer();
+    await useDelPlayer(id);
     await listAllPlayer();
   }
 

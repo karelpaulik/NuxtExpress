@@ -10,5 +10,11 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     'nuxt-quasar-ui'
   ],
-  quasar: { /* */ }
+  quasar: { /* */ },
+  imports: {
+    dirs: [
+      'composables',
+      'composables/*/'
+    ]
+  }
 })
