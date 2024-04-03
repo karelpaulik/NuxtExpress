@@ -73,4 +73,13 @@ require('./modules/user.js')(app)
 require('./modules/auth.js')(app)
 require('./modules/player.js')(app)
 
+//Expressjs error handling
+//Ošetření chyb pro "app.post('/playerFile/:id'"
+//!!! - aby fungovalo, musí být umístěno za "app.post('/playerFile/:id'", může být umístěno na konci kódu
+app.use((err, req, res, next) => {
+    console.log(err)
+    //console.log('This is the rejected field ->', err.field);
+    res.status(500).send('Something broke!')
+})
+
 app.listen(port, () => {console.log(`server listening on port: ${port}`)});
