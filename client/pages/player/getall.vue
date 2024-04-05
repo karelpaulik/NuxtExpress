@@ -22,7 +22,7 @@
             <img :src="`${runtimeConfig.public.baseURL}/${file.path}`" width="400">
           </div>
         </div>
-        <button @click="fceDelThisRecord(rec._id)">Delete this record</button>
+        <PlayerDelBtn :playerToDel="rec._id" @response="fcelistAlllPlayer" />
         <button @click="fceMoveToRecord(rec._id)">Move to record</button>
         <hr>
       </div>
@@ -30,7 +30,7 @@
 </template>
   
 <script setup>
-  import {ref, reactive} from 'vue'
+  import {ref} from 'vue'
   const runtimeConfig = useRuntimeConfig()
 
   const { data: dataAllPlayer, refresh: listAllPlayer } = await useFetch('/player', {
@@ -38,13 +38,12 @@
     baseURL: runtimeConfig.public.baseURL
   });
 
-  async function fceDelThisRecord(id) {
-    await useDelPlayer(id);
-    await listAllPlayer();
-  }
-
   async function fceMoveToRecord(id) {
     await navigateTo('/player/getspec-' + id);
+  }
+
+  async function fcelistAlllPlayer() {
+    await listAllPlayer();
   }
   
 </script>
