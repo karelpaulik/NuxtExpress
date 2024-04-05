@@ -22,8 +22,8 @@
             <img :src="`${runtimeConfig.public.baseURL}/${file.path}`" width="400">
           </div>
         </div>
-        <PlayerDelBtn :playerToDel="rec._id" @response="async() => {await listAllPlayer()}" />
-        <button @click="fceMoveToRecord(rec._id)">Move to record</button>
+        <PlayerDelBtn :playerToDel="rec._id" @response="async() => {await updateAllPlayer()}" />
+        <button @click="async() => { await navigateTo('/player/getspec-' + rec._id) }">Move to record</button>
         <hr>
       </div>
     </div>
@@ -33,13 +33,18 @@
   import {ref} from 'vue'
   const runtimeConfig = useRuntimeConfig()
 
-  const { data: dataAllPlayer, refresh: listAllPlayer } = await useFetch('/player', {
-    method: 'get',
-    baseURL: runtimeConfig.public.baseURL
-  });
+  //Buď useFetch přímo zde:
+  // const { data: dataAllPlayer, refresh: updateAllPlayer } = await useFetch('/player', {
+  //   method: 'get',
+  //   baseURL: runtimeConfig.public.baseURL
+  // });
 
-  async function fceMoveToRecord(id) {
-    await navigateTo('/player/getspec-' + id);
+  //Nebo useFetch umístěno v composables:
+  const dataAllPlayer = ref(null)
+  await updateAllPlayer()
+  
+  async function updateAllPlayer() {
+    dataAllPlayer.value = await useGetAllPlayers()
   }
   
 </script>
