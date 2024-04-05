@@ -41,6 +41,8 @@
           @uploaded="send"
         />
 
+        <PlayerDelBtn :playerToDel="dataSpecPlayer._id" @response="() => { navigateTo('/player/getall') }" />
+
       </div>     
     </div>
 </template>

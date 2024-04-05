@@ -22,7 +22,7 @@
             <img :src="`${runtimeConfig.public.baseURL}/${file.path}`" width="400">
           </div>
         </div>
-        <PlayerDelBtn :playerToDel="rec._id" @response="fcelistAlllPlayer" />
+        <PlayerDelBtn :playerToDel="rec._id" @response="async() => {await listAllPlayer()}" />
         <button @click="fceMoveToRecord(rec._id)">Move to record</button>
         <hr>
       </div>
@@ -40,10 +40,6 @@
 
   async function fceMoveToRecord(id) {
     await navigateTo('/player/getspec-' + id);
-  }
-
-  async function fcelistAlllPlayer() {
-    await listAllPlayer();
   }
   
 </script>
