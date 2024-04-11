@@ -46,21 +46,24 @@ module.exports = function(app ) {
     app.post('/player', upload.array('file'), async(req, res) => {
         //console.log(req.body);    //console.log(req.file);    //console.log(req.files);
         try {
-            const p = await Player.create(req.body);
-            for (let item of req.files) {
-                const f = await PlayerFile.create(item);
-                //await f.setPlayer(p);   //Toto je vložení vazby v sequelize
-                await p.files.push(f._id);
-                await p.save();
-            }
+            //Pokud má req.body v sobě atribut "_id" tak ho smaž. Zde se "_id" maže jednodušeji než na klientovi.
+            const x = req.body;
+            delete x._id;
+            const p = await Player.create(x);
+            // for (let item of req.files) {
+            //     const f = await PlayerFile.create(item);
+            //     //await f.setPlayer(p);   //Toto je vložení vazby v sequelize
+            //     await p.files.push(f._id);
+            //     await p.save();
+            // }
+            res.send(p);
         } catch(err) {
             console.log("catch blok");
             console.log(err);
         } finally {
             console.log('finally blok')
         }
-        console.log('---------------------')
-        res.send(req.body);
+        //res.send(req.body);
     });
     
     app.get('/player', async(req, res) => {
@@ -82,7 +85,7 @@ module.exports = function(app ) {
         console.log("update: ", update);
         const p = await Player.findOneAndUpdate(filter, update, {
             new: true
-        });
+        }).populate('files').exec();
         res.send(p);
     });
     

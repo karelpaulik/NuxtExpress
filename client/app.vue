@@ -15,6 +15,8 @@
     <div><NuxtLink to="/player/insert">insert</NuxtLink></div>
     <div><NuxtLink to="/player/delete">delete</NuxtLink></div>
     <div>---------------</div>
+    <div><NuxtLink to="/player/player-">player</NuxtLink></div>
+    <div><NuxtLink to="/player/playerList">playerList</NuxtLink></div>
     <NuxtPage />
   </div>
 </template>

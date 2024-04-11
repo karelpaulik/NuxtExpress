@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="display: inline">
         <q-btn color="primary" @click="dialogBeforeDelRec = true" label="Delete this record" />
         <q-dialog v-model="dialogBeforeDelRec">
           <q-card>
