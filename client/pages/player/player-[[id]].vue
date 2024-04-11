@@ -1,6 +1,6 @@
 <template>
     <div>
-        <pre>{{ fd }}</pre>
+        <pre style="font-size: small">{{ fd }}</pre>
         <form @submit.prevent="send">
           <q-card>
             <input v-model="fd.fName" placeholder="fName" />
@@ -36,6 +36,18 @@
           </div>
         </div>
 
+        <div v-if="fd._id">
+        <q-uploader
+          :url="`${runtimeConfig.public.baseURL}/playerFile/${fd._id}`"
+          label="Individual upload"
+          multiple
+          style="max-width: 300px"
+          field-name="file"
+          ref="uploader"
+          @uploaded="uploadFiles"
+        />
+        </div>
+
         <q-btn color="primary" @click="createPlayer" label="Create new record" />
         <q-btn color="primary" @click="update" label="Update record" />
         <PlayerDelBtn :playerToDel="fd._id" @response="() => { navigateTo('/player/getall') }" />
@@ -46,6 +58,9 @@
   import { ref, reactive }  from 'vue';
   const route = useRoute();
   const runtimeConfig = useRuntimeConfig();
+
+  //Toto definováno, abych mohl po odeslání souborů na servery tyto soubory odstranit z uploaderu.
+  const uploader = ref(null);
 
   const fd = ref({
     //Pozor je rozdíl, jestli u stringu zadám jako počáteční hodnotu: '', nebo null
@@ -69,7 +84,9 @@
 
   //Vytvoření nového záznamu
   async function createPlayer() {
-    fd.value = await usePostPlayer(fd.value)
+    //fd.value = await usePostPlayer(fd.value)  //Nepoužívám, protože se nové "_id" nepřepíše do web. adresy.
+    const x = await usePostPlayer(fd.value)
+    await navigateTo('/player/player-' + x._id)
   }
 
   //Update existujícího záznamu
@@ -83,13 +100,16 @@
     fd.value.files = fd.value.files.filter( (value, index, array) => {
       return value !== file
     } )
-
     //Smazání souboru z kollekce souborů
     await useDelplayerFile(file._id)
-
     //Aktualizace player
     fd.value = await usePutPlayer(route.params.id, fd.value)
   }
+
+  async function uploadFiles() {
+    uploader.value.removeUploadedFiles()  //Odstranění souborů z uploaderu
+    fd.value = await useGetPlayer(route.params.id)
+  }  
 
 </script>
   

@@ -1,22 +1,31 @@
 <template>
   <div>
-    <pre>logedUser: {{ logedUser.email }}</pre>
-    <div><NuxtLink to="/">index</NuxtLink></div>
-    <div><NuxtLink to="/private">Private</NuxtLink></div>
-    <div><NuxtLink to="/userAuth/login">login</NuxtLink></div>
-    <div><NuxtLink to="/userAuth/loginInfo">login info</NuxtLink></div>
-    <div><NuxtLink to="/userAuth/logout">logout</NuxtLink></div>
-    <div><NuxtLink to="/signup">Signup</NuxtLink></div>
-    <a :href="`${runtimeConfig.public.baseURL}/expresslogin`">expressjs login - zadní vrátka</a>
-    <div>---------------</div>
-    <div><NuxtLink to="/player/">index</NuxtLink></div>
-    <div><NuxtLink to="/player/getall">getall</NuxtLink></div>
-    <div><NuxtLink to="/player/getspec">getspec</NuxtLink></div>
-    <div><NuxtLink to="/player/insert">insert</NuxtLink></div>
-    <div><NuxtLink to="/player/delete">delete</NuxtLink></div>
-    <div>---------------</div>
-    <div><NuxtLink to="/player/player-">player</NuxtLink></div>
-    <div><NuxtLink to="/player/playerList">playerList</NuxtLink></div>
+    <div class="q-pa-md row items-start q-gutter-md" >
+      <q-card class="my-card">
+        <q-card-section>
+          <pre>logedUser: {{ logedUser.email }}</pre>
+          <div><NuxtLink to="/">index</NuxtLink></div>
+          <div><NuxtLink to="/private">Private</NuxtLink></div>
+          <div><NuxtLink to="/userAuth/login">login</NuxtLink></div>
+          <div><NuxtLink to="/userAuth/loginInfo">login info</NuxtLink></div>
+          <div><NuxtLink to="/userAuth/logout">logout</NuxtLink></div>
+          <div><NuxtLink to="/signup">Signup</NuxtLink></div>
+          <a :href="`${runtimeConfig.public.baseURL}/expresslogin`">expressjs login - zadní vrátka</a>
+        </q-card-section>
+      </q-card>
+      <q-card class="my-card">
+        <q-card-section>
+          <div><NuxtLink to="/player/">index</NuxtLink></div>
+          <div><NuxtLink to="/player/getall">getall</NuxtLink></div>
+          <div><NuxtLink to="/player/getspec">getspec</NuxtLink></div>
+          <div><NuxtLink to="/player/insert">insert</NuxtLink></div>
+          <div><NuxtLink to="/player/delete">delete</NuxtLink></div>
+          <div>---------------</div>
+          <div><NuxtLink to="/player/playerList">playerList</NuxtLink></div>
+          <div><NuxtLink to="/player/player-">player</NuxtLink></div>
+        </q-card-section>
+      </q-card>
+    </div>
     <NuxtPage />
   </div>
 </template>
@@ -61,4 +70,11 @@
 body {
   background-color: gray;
 }
+
+.my-card {
+  width: 100%;
+  height: 230px;
+  max-width: 250px;
+}
+
 </style>
