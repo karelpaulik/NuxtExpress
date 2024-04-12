@@ -10,7 +10,7 @@ export const usePostPlayer = async(body: object) => {
   return data.value;
 }
 
-export const useGetAllPlayers = async() => {
+export const useGetAllPlayer = async() => {
   const runtimeConfig = useRuntimeConfig()
 
   const { data, refresh} = await useFetch( () => '/player', {

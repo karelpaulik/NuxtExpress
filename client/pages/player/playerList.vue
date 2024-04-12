@@ -17,7 +17,7 @@
             <img :src="`${runtimeConfig.public.baseURL}/${file.path}`" width="400">
           </div>
         </div>
-        <PlayerDelBtn :playerToDel="rec._id" @response="async() => {await updateAllPlayer()}" />
+        <PlayerDelBtn :playerToDel="rec._id" @response="async() => {await fceReadAllPlayer()}" />
         <q-btn color="primary" @click="async() => { await navigateTo('/player/player-' + rec._id) }" label="Move to record" />
         <hr>
       </div>
@@ -29,10 +29,10 @@
   const runtimeConfig = useRuntimeConfig()
   const dataAllPlayer = ref(null)
 
-  await updateAllPlayer()
+  await fceReadAllPlayer()
   
-  async function updateAllPlayer() {
-    dataAllPlayer.value = await useGetAllPlayers()
+  async function fceReadAllPlayer() {
+    dataAllPlayer.value = await useGetAllPlayer()
   }
   
 </script>

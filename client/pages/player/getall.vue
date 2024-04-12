@@ -44,7 +44,7 @@
   await updateAllPlayer()
   
   async function updateAllPlayer() {
-    dataAllPlayer.value = await useGetAllPlayers()
+    dataAllPlayer.value = await useGetAllPlayer()
   }
   
 </script>
