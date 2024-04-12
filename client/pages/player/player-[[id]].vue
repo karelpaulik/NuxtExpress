@@ -101,11 +101,12 @@
       return value !== file
     } )
     //Smazání souboru z kollekce souborů
-    await useDelplayerFile(file._id)
+    await useDelPlayerFile(file._id)
     //Aktualizace player
     fd.value = await usePutPlayer(route.params.id, fd.value)
   }
 
+  //Upload souboru
   async function uploadFiles() {
     uploader.value.removeUploadedFiles()  //Odstranění souborů z uploaderu
     fd.value = await useGetPlayer(route.params.id)

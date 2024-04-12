@@ -13,7 +13,7 @@ export const usePostPlayer = async(body: object) => {
 export const useGetAllPlayers = async() => {
   const runtimeConfig = useRuntimeConfig()
 
-  const { data, refresh} = await useFetch('/player', {
+  const { data, refresh} = await useFetch( () => '/player', {
     method: 'get',
     baseURL: runtimeConfig.public.baseURL
   });
@@ -64,7 +64,7 @@ export const useDelPlayer = async(id: string) => {
 
 //playerFile----------------------------------------------------
 
-export const useDelplayerFile = async(id: string) => {
+export const useDelPlayerFile = async(id: string) => {
   const runtimeConfig = useRuntimeConfig()
 
   const { data, refresh } = await useFetch( () => '/playerFile/' + id, {  
