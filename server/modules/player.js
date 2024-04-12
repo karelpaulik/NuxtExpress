@@ -43,7 +43,8 @@ module.exports = function(app ) {
     //nyní asi univerzální, ponechat "upload.array"
     //pokud nepošlu žádný soubor, pak "req.files" není undefined, ale prázdné pole, tj. []
     //funguje, i pokud na klientovi není nastaveno "multiple"
-    app.post('/player', upload.array('file'), async(req, res) => {
+    //app.post('/player', upload.array('file'), async(req, res) => {
+    app.post('/player', async(req, res) => {        
         //console.log(req.body);    //console.log(req.file);    //console.log(req.files);
         try {
             //Pokud má req.body v sobě atribut "_id" tak ho smaž. Zde se "_id" maže jednodušeji než na klientovi.

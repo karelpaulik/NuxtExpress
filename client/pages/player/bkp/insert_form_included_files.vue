@@ -49,14 +49,6 @@
     file: null
   })
 
-  // const { data, refresh } = await useFetch( () => '/player', {
-  //   method: 'post',
-  //   baseURL: 'runtimeConfig.public.baseURL',
-  //   immediate: false,
-  //   watch: false,
-  //   body: fd
-  // });
-
   async function send() {
     const formData = new FormData();
 
@@ -82,8 +74,6 @@
       watch: false,
       body: formData
       //body: fd
-      //change from home 1
-      //change from home 2
     });
 
     refresh();

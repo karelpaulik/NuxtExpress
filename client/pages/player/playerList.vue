@@ -7,6 +7,11 @@
         <div>lName: {{ rec.lName }}</div>
         <div><strong>Full name: </strong> {{ `${rec.fName} ${rec.lName}` }}</div>
         <div v-if="rec.age">age: {{ rec.age }}</div>
+        <!-- Následující platilo pro: na serveru: { raw: true } -->
+        <!-- <div>city(parsed): {{ JSON.parse(rec.city) }}</div>
+        <div v-for="c in JSON.parse(rec.city)">
+          city: {{ c }}
+        </div> -->
         <div v-if="rec.city">city: {{ rec.city }}</div>
         <div v-for="c in rec.city">
           city: {{ c }}

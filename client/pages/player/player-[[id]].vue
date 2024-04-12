@@ -50,7 +50,7 @@
 
         <q-btn color="primary" @click="fceCreatePlayer" label="Create new record" />
         <q-btn color="primary" @click="fceUpdatePlayer" label="Update record" />
-        <PlayerDelBtn :playerToDel="dataPlayer._id" @response="() => { navigateTo('/player/getall') }" />
+        <PlayerDelBtn :playerToDel="dataPlayer._id" @response="() => { navigateTo('/player/playerList') }" />
     </div>
 </template>
   
