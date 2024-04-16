@@ -1,6 +1,6 @@
 <template>
     <div>
-      <pre>{{ dataAllPlayer }}</pre>
+      <!-- <pre>{{ dataAllPlayer }}</pre> -->
       <div v-for="rec in dataAllPlayer" :key="rec.id" >
         <div>Id: {{ rec._id }}</div>
         <div>fName: {{ rec.fName }}</div>

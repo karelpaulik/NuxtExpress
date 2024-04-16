@@ -1,6 +1,10 @@
 <template>
     <div>
-        <pre style="font-size: small">{{ dataPlayer }}</pre>
+        <!-- <pre style="font-size: small">{{ dataPlayer }}</pre> -->
+        <q-btn color="primary" @click="fceCreatePlayer" label="Create new record" />
+        <q-btn color="primary" @click="fceUpdatePlayer" label="Update record" />
+        <PlayerDelBtn :playerToDel="dataPlayer._id" @response="() => { navigateTo('/player/playerList') }" />
+
         <form @submit.prevent="send">
           <q-card>
             <input v-model="dataPlayer.fName" placeholder="fName" />
@@ -29,10 +33,27 @@
         </form>
 
         <div v-if="dataPlayer.files">
-          <div v-for="file in dataPlayer.files">
-            <img :src="`${runtimeConfig.public.baseURL}/${file.path}`" width="400">
-            <!-- Pozor: níže je "file" ne "file._id" -->
-            <button @click="fceDelPlayerFile(file)">Delete this picture</button>
+          <div class="q-pa-xs">
+            <div class="fit row justify-start items-stretch q-col-gutter-xs">            
+                <div class="col-3 text-primary bg-secondary" v-for="file in dataPlayer.files">
+                  <q-card class="fit">
+                    <q-card-section>  
+                      <q-img
+                        :src="`${runtimeConfig.public.baseURL}/${file.path}`"
+                      >
+                        <div class="absolute-bottom text-subtitle1 text-center">
+                          {{ file.originalname }}
+                        </div>
+                      </q-img>
+                    </q-card-section>
+                    <q-separator />
+                    <q-card-actions>  
+                      <!-- Pozor: níže je "file" ne "file._id" -->
+                      <q-btn @click="fceDelPlayerFile(file)" label="Del pict" />
+                    </q-card-actions>
+                  </q-card>
+                </div>            
+            </div>
           </div>
         </div>
 
@@ -48,9 +69,6 @@
         />
         </div>
 
-        <q-btn color="primary" @click="fceCreatePlayer" label="Create new record" />
-        <q-btn color="primary" @click="fceUpdatePlayer" label="Update record" />
-        <PlayerDelBtn :playerToDel="dataPlayer._id" @response="() => { navigateTo('/player/playerList') }" />
     </div>
 </template>
   
