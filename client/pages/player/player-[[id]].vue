@@ -32,42 +32,7 @@
           </q-card>
         </form>
 
-        <div v-if="dataPlayer.files">
-          <div class="q-pa-xs">
-            <div class="fit row justify-start items-stretch q-col-gutter-xs">            
-                <div class="col-3 text-primary bg-secondary" v-for="file in dataPlayer.files">
-                  <q-card class="fit">
-                    <q-card-section>  
-                      <q-img
-                        :src="`${runtimeConfig.public.baseURL}/${file.path}`"
-                      >
-                        <div class="absolute-bottom text-subtitle1 text-center">
-                          {{ file.originalname }}
-                        </div>
-                      </q-img>
-                    </q-card-section>
-                    <q-separator />
-                    <q-card-actions>  
-                      <!-- Pozor: níže je "file" ne "file._id" -->
-                      <q-btn @click="fceDelPlayerFile(file)" label="Del pict" />
-                    </q-card-actions>
-                  </q-card>
-                </div>            
-            </div>
-          </div>
-        </div>
-
-        <div v-if="dataPlayer._id">
-        <q-uploader
-          :url="`${runtimeConfig.public.baseURL}/playerFile/${dataPlayer._id}`"
-          label="Individual upload"
-          multiple
-          style="max-width: 300px"
-          field-name="file"
-          ref="uploader"
-          @uploaded="fceAfterPlayerFileUpload"
-        />
-        </div>
+        <PlayerFileList :playerId="dataPlayer._id" v-if="route.params.id" />
 
     </div>
 </template>
@@ -76,9 +41,6 @@
   import { ref, reactive }  from 'vue';
   const route = useRoute();
   const runtimeConfig = useRuntimeConfig();
-
-  //Toto definováno, abych mohl po odeslání souborů na servery tyto soubory odstranit z uploaderu.
-  const uploader = ref(null);
 
   const dataPlayer = ref({
     //Pozor je rozdíl, jestli u stringu zadám jako počáteční hodnotu: '', nebo null
@@ -97,7 +59,12 @@
 
   //Kontrola, zda bude nový záznam, nebo zobrazení již existujícího
   if (route.params.id) {   
-    dataPlayer.value = await useGetPlayer(route.params.id)
+    await fceGetPlayer(route.params.id)   //Zde musí být na začátku "await", jinak program padne.
+  }
+
+  //Načtení záznamu
+  async function fceGetPlayer(id) {
+    dataPlayer.value = await useGetPlayer(id)
   }
 
   //Vytvoření nového záznamu
@@ -111,24 +78,6 @@
   async function fceUpdatePlayer() {
     dataPlayer.value = await usePutPlayer(dataPlayer.value._id, dataPlayer.value)
   }
-
-  //Smazání souboru
-  async function fceDelPlayerFile(file) {
-    //Odstranění souborů z dataPlayer
-    dataPlayer.value.files = dataPlayer.value.files.filter( (value, index, array) => {
-      return value !== file
-    } )
-    //Smazání souboru z kollekce souborů
-    await useDelPlayerFile(file._id)
-    //Aktualizace player
-    dataPlayer.value = await usePutPlayer(route.params.id, dataPlayer.value)
-  }
-
-  //Upload souboru
-  async function fceAfterPlayerFileUpload() {
-    uploader.value.removeUploadedFiles()  //Odstranění souborů z uploaderu
-    dataPlayer.value = await useGetPlayer(route.params.id)
-  }  
 
 </script>
   

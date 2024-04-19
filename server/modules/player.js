@@ -89,7 +89,19 @@ module.exports = function(app ) {
         }).populate('files').exec();
         res.send(p);
     });
-    
+
+    //Zde je:
+    //:id       ... tj. _id modelu "player"
+    //req.body  ... tj. body pouze od: player.file
+    app.put('/player/:id/files', async(req, res) => {
+        //!!!!!!! Pozor !!!!!!!!
+        //const p = await Player.findOne({_id: req.params.id}).populate('files').exec();    //Toto nemůže být, protože pak je problém se smazáním posledního záznamu.
+        const p = await Player.findOne({_id: req.params.id});
+        p.files = req.body;
+        await p.save();
+        res.send(p);
+    });
+
     app.delete('/player/:id', async(req, res) => {
         const p = await Player.findById(req.params.id);
         if (p) {  

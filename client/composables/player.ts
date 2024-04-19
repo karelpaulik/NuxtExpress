@@ -40,11 +40,19 @@ export const usePutPlayer = async(id: string, body: object) => {
     body: body
   });
 
-  // const { data: dataGet, refresh: reftGet } = await useFetch( () => '/player/' + id, {
-  //   method: 'get',
-  //   baseURL: runtimeConfig.public.baseURL
-  // });
-  // return dataGet.value;
+  return data.value;
+}
+
+//id: string    ... player.id
+//body: object  ... Jde o body vlastnosti "player.files", není to body od objektu "player"
+export const usePutPlayer_files = async(id: string, body: object) => {
+  const runtimeConfig = useRuntimeConfig()
+
+  const { data, refresh } = await useFetch( () => '/player/' + id + '/files', {
+    method: 'put',
+    baseURL: runtimeConfig.public.baseURL,
+    body: body
+  });
 
   return data.value;
 }
