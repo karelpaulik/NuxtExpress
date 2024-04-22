@@ -32,7 +32,7 @@
           </q-card>
         </form>
 
-        <PlayerFileList :playerId="dataPlayer._id" v-if="route.params.id" />
+        <PlayerFile :playerId="dataPlayer._id" v-if="route.params.id" />
 
     </div>
 </template>

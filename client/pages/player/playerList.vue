@@ -16,12 +16,15 @@
         <div v-for="c in rec.city">
           city: {{ c }}
         </div>
-        <div v-if="rec.files">
-          <div v-for="file in rec.files">
+
+        <!-- <div v-if="rec.files">
+          <div v-for="file in rec.files"> -->
             <!-- <img :src="`http://localhost:5000/${file.path}`" width="400"> -->
-            <img :src="`${runtimeConfig.public.baseURL}/${file.path}`" width="400">
+            <!-- <img :src="`${runtimeConfig.public.baseURL}/${file.path}`" width="400">
           </div>
-        </div>
+        </div> -->
+        <PlayerFileList :playerId="rec._id" :playerFiles="rec.files"/>
+
         <PlayerDelBtn :playerToDel="rec._id" @response="async() => {await fceReadAllPlayer()}" />
         <q-btn color="primary" @click="async() => { await navigateTo('/player/player-' + rec._id) }" label="Move to record" />
         <hr>
@@ -31,7 +34,7 @@
   
 <script setup>
   import {ref} from 'vue'
-  const runtimeConfig = useRuntimeConfig()
+  //const runtimeConfig = useRuntimeConfig()
   const dataAllPlayer = ref(null)
 
   await fceReadAllPlayer()

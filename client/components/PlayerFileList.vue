@@ -26,39 +26,36 @@
           </div>
         </div>
 
-        <!-- <div v-if="dataPlayerFiles"> -->
-        <q-uploader
-          :url="`${runtimeConfig.public.baseURL}/playerFile/${playerId}`"
-          label="Individual upload"
-          multiple
-          style="max-width: 300px"
-          field-name="file"
-          ref="uploader"
-          @uploaded="fceAfterPlayerFileUpload"
-        />
-        <!-- </div> -->
-
     </div>
 </template>
   
 <script setup>
-  import { ref, reactive }  from 'vue';
+  import { ref, watch }  from 'vue';
   const route = useRoute();
   const runtimeConfig = useRuntimeConfig();
-  const uploader = ref(null)    //Toto definováno, abych mohl po odeslání souborů na servery tyto soubory odstranit z uploaderu.
-  const dataPlayerFiles=ref(null)
 
   //Component properties
   const props = defineProps({
-    playerId: String
+    playerId: String, //kvůli mazání souborů
+    playerFiles: Object
   })
 
+  //Data for HTML rendering
+  const dataPlayerFiles=ref(null)
+
+  //Úvodní načtení dat
   await fceGetPlayerFiles()
 
-  //Načtení player.files
+  //Hlídání změn "props.playerFiles"
+  watch( () => props.playerFiles,
+    async() => {
+      await fceGetPlayerFiles()
+  })
+
+  //--------------------------------------------------------------function definition------------------------------------------------
+  //Načtení dat
   async function fceGetPlayerFiles() {
-    const dataPlayer = await useGetPlayer(props.playerId)
-    dataPlayerFiles.value = dataPlayer.files
+    dataPlayerFiles.value = props.playerFiles
   }
 
   //Smazání souboru
@@ -71,15 +68,8 @@
     await useDelPlayerFile(file._id)
 
     //Aktualizace player
-    //dataPlayer.value = await usePutPlayer(route.params.id, dataPlayer.value)
     await usePutPlayer_files(props.playerId, dataPlayerFiles.value)
   }
-
-  //Upload souboru
-  async function fceAfterPlayerFileUpload() {
-    uploader.value.removeUploadedFiles()  //Odstranění souborů z uploaderu
-    await fceGetPlayerFiles()
-  }  
 
 </script>
   
