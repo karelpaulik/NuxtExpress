@@ -37,8 +37,10 @@
   //const runtimeConfig = useRuntimeConfig()
   const dataAllPlayer = ref(null)
 
+  //Data for HTML rendering
   await fceReadAllPlayer()
   
+  //Načtení záznamů
   async function fceReadAllPlayer() {
     dataAllPlayer.value = await useGetAllPlayer()
   }

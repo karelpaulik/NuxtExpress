@@ -42,6 +42,7 @@
   const route = useRoute();
   const runtimeConfig = useRuntimeConfig();
 
+  //Data for HTML rendering
   const dataPlayer = ref({
     //Pozor je rozdíl, jestli u stringu zadám jako počáteční hodnotu: '', nebo null
     //Pozor, stejně tak je rozdíl u čísla

@@ -20,7 +20,6 @@
   
 <script setup>
   import { ref, reactive }  from 'vue';
-  const route = useRoute();
   const runtimeConfig = useRuntimeConfig();
   const uploader = ref(null)    //Toto definováno, abych mohl po odeslání souborů na servery tyto soubory odstranit z uploaderu.
 

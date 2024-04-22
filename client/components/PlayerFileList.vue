@@ -31,7 +31,6 @@
   
 <script setup>
   import { ref, watch }  from 'vue';
-  const route = useRoute();
   const runtimeConfig = useRuntimeConfig();
 
   //Component properties
@@ -44,20 +43,15 @@
   const dataPlayerFiles=ref(null)
 
   //Úvodní načtení dat
-  await fceGetPlayerFiles()
+  dataPlayerFiles.value = props.playerFiles
 
   //Hlídání změn "props.playerFiles"
   watch( () => props.playerFiles,
-    async() => {
-      await fceGetPlayerFiles()
+    () => {
+      dataPlayerFiles.value = props.playerFiles
   })
 
   //--------------------------------------------------------------function definition------------------------------------------------
-  //Načtení dat
-  async function fceGetPlayerFiles() {
-    dataPlayerFiles.value = props.playerFiles
-  }
-
   //Smazání souboru
   async function fceDelPlayerFile(file) {
     //Odstranění souborů z dataPlayerFiles
