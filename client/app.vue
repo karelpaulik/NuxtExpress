@@ -16,7 +16,7 @@
       <q-card class="my-card">
         <q-card-section>
           <div><NuxtLink to="/player/">index</NuxtLink></div>
-          <div><NuxtLink to="/player/playerList">playerList</NuxtLink></div>
+          <div><NuxtLink to="/player/playerList">playerList</NuxtLink> Privat (client and server)</div>
           <div><NuxtLink to="/player/player-">player</NuxtLink></div>
         </q-card-section>
       </q-card>

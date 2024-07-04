@@ -4,6 +4,7 @@ export const usePostPlayer = async(body: object) => {
   const { data , refresh } = await useFetch( () => '/player', {
     method: 'post',
     baseURL: runtimeConfig.public.baseURL,
+    credentials: 'include',
     body: body
   });
   console.log("usePostPlayer: ", data.value)
@@ -15,7 +16,8 @@ export const useGetAllPlayer = async() => {
 
   const { data, refresh} = await useFetch( () => '/player', {
     method: 'get',
-    baseURL: runtimeConfig.public.baseURL
+    baseURL: runtimeConfig.public.baseURL,
+    credentials: 'include'
   });
   return data.value;
 }
@@ -26,6 +28,7 @@ export const useGetPlayer = async(id: string) => {
   const { data, refresh } = await useFetch( () => '/player/' + id, {  
     method: 'get',
     baseURL: runtimeConfig.public.baseURL,
+    credentials: 'include',
   });
 
   return data.value;
@@ -37,6 +40,7 @@ export const usePutPlayer = async(id: string, body: object) => {
   const { data, refresh } = await useFetch( () => '/player/' + id, {
     method: 'put',
     baseURL: runtimeConfig.public.baseURL,
+    credentials: 'include',
     body: body
   });
 
@@ -51,6 +55,7 @@ export const usePutPlayer_files = async(id: string, body: object) => {
   const { data, refresh } = await useFetch( () => '/player/' + id + '/files', {
     method: 'put',
     baseURL: runtimeConfig.public.baseURL,
+    credentials: 'include',
     body: body
   });
 
@@ -65,7 +70,7 @@ export const useDelPlayer = async(id: string) => {
     baseURL: runtimeConfig.public.baseURL,
     //immediate: false,
     //watch: false,
-    //credentials: 'include'
+    credentials: 'include'
   });
   return data.value;
 }
@@ -78,6 +83,7 @@ export const useDelPlayerFile = async(id: string) => {
   const { data, refresh } = await useFetch( () => '/playerFile/' + id, {  
     method: 'delete',
     baseURL: runtimeConfig.public.baseURL,
+    credentials: 'include',
   });
   return data.value;
 }

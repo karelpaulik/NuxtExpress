@@ -35,6 +35,7 @@ app.use(session({
 }));
 
 app.use('/uploads', express.static('uploads')); //Použití: http://localhost:5000/uploads/1.png  //app.use(express.static('uploads')); Použití: http://localhost:5000/1.png
+
 //-----------------------route handlers-----------------------------------------------------
 const requireAuthHandler = async(req, res, next) => {
     const user = req.session.user;
@@ -45,6 +46,7 @@ const requireAuthHandler = async(req, res, next) => {
 
     //Kontrola existence uživatele v databázi. Přo případ, když bych uživatele smazal, ale on byl příhlášen přes session.
     try {
+        const { User } = require('./models/modelsMongoose.js');
         const u = await User.findById(user._id).exec();
         if (!u) {
             res.status(401).send("User does not exist in db");
@@ -71,7 +73,7 @@ const requireAdminHandler = (req, res, next) => {
 require('./modules/helpers.js')(app, requireAuthHandler, requireAdminHandler)
 require('./modules/user.js')(app)
 require('./modules/auth.js')(app)
-require('./modules/player.js')(app)
+require('./modules/player.js')(app, requireAuthHandler)
 
 //Expressjs error handling
 //Ošetření chyb pro "app.post('/playerFile/:id'"

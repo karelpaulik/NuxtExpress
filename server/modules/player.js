@@ -1,4 +1,4 @@
-module.exports = function(app ) {
+module.exports = function(app, requireAuthHandler ) {
 
     // const express = require('express');
     // const cors = require('cors');
@@ -67,7 +67,7 @@ module.exports = function(app ) {
         //res.send(req.body);
     });
     
-    app.get('/player', async(req, res) => {
+    app.get('/player', requireAuthHandler, async(req, res) => {
         const p = await Player.find().populate('files').exec();
         //console.log(JSON.parse(JSON.stringify(p)));
         res.send(p);
