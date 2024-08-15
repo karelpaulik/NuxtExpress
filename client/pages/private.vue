@@ -1,6 +1,6 @@
 <template>
     <div>
-      <h1>Private</h1>
+      <div class="text-h2">Private</div>
     </div>
 </template>
 

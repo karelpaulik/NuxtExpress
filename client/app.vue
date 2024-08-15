@@ -1,32 +1,103 @@
-<template>
-  <div>
-    <div class="q-pa-md row items-start q-gutter-md" >
-      <q-card class="my-card">
-        <q-card-section>
-          <pre>logedUser: {{ logedUser.email }}</pre>
-          <div><NuxtLink to="/">index</NuxtLink></div>
-          <div><NuxtLink to="/private">Private</NuxtLink></div>
-          <div><NuxtLink to="/userAuth/login">login</NuxtLink></div>
-          <div><NuxtLink to="/userAuth/loginInfo">login info</NuxtLink></div>
-          <div><NuxtLink to="/userAuth/logout">logout</NuxtLink></div>
-          <div><NuxtLink to="/signup">Signup</NuxtLink></div>
-          <a :href="`${runtimeConfig.public.baseURL}/expresslogin`">expressjs login - zadní vrátka</a>
-        </q-card-section>
-      </q-card>
-      <q-card class="my-card">
-        <q-card-section>
-          <div><NuxtLink to="/player/">index</NuxtLink></div>
-          <div><NuxtLink to="/player/playerList">playerList</NuxtLink> Privat (client and server)</div>
-          <div><NuxtLink to="/player/player-">player</NuxtLink></div>
-        </q-card-section>
-      </q-card>
-    </div>
-    <NuxtPage />
-  </div>
+<template>  
+  <q-layout view="hHh LpR fff">
+
+    <q-header elevated class="bg-primary text-white" height-hint="98">
+      <q-toolbar align="center">
+        <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
+        <q-toolbar-title>
+          <q-avatar>
+            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
+          </q-avatar>
+          Title
+        </q-toolbar-title>
+        <pre>logedUser: {{ logedUser.email }}</pre>
+        <q-btn dense flat round icon="menu" @click="toggleRightDrawer" />
+      </q-toolbar>
+      <q-tabs align="center" no-caps="">
+        <q-route-tab to="/" label="Index" />
+        <q-route-tab to="/private" label="Private" />
+        <q-route-tab to="/userAuth/login" label="Login" />
+        <q-route-tab to="/userAuth/loginInfo" label="Login info" />
+        <q-route-tab to="/userAuth/logout" label="Logout" />
+        <q-route-tab to="/signup" label="Signup" />
+        <a :href="`${runtimeConfig.public.baseURL}/expresslogin`">expressjs login - zadní vrátka</a>
+        <q-btn-dropdown no-caps auto-close stretch flat label="Player">
+          <q-list>
+            <q-item>
+              <q-route-tab to="/player/" label="Index" />
+            </q-item>
+            <q-item>
+              <q-route-tab to="/player/playerList" label="PlayerList, Privat - client and server" />
+            </q-item>
+            <q-item>
+              <q-route-tab to="/player/player-" label="Player" />
+            </q-item>
+          </q-list>
+        </q-btn-dropdown>
+      </q-tabs>
+    </q-header>
+
+    <q-drawer show-if-above v-model="leftDrawerOpen" side="left" bordered>
+      <q-list bordered separator>
+        <q-item clickable v-ripple><NuxtLink to="/">Home page</NuxtLink></q-item>
+        <q-item clickable v-ripple><NuxtLink to="/images">Images</NuxtLink></q-item>
+        <q-item clickable v-ripple><NuxtLink to="/contacts">Contacts</NuxtLink></q-item>
+        <q-item clickable v-ripple><q-icon name="phone_iphone" />Item</q-item>
+        <q-item clickable v-ripple><q-icon name="thumb_up" size="md" color="pink-3" />Item1</q-item>
+        <q-item clickable v-ripple><q-icon name="o_thumb_up" size="md" color="teal-14" />Item2</q-item>
+      </q-list>
+    </q-drawer>
+
+    <q-drawer v-model="rightDrawerOpen" side="right" bordered>
+      <q-list bordered separator>
+        <q-item clickable v-ripple><NuxtLink to="/">Home page</NuxtLink></q-item>
+        <q-item clickable v-ripple><NuxtLink to="/images">Images</NuxtLink></q-item>
+        <q-item clickable v-ripple><NuxtLink to="/contacts">Contacts</NuxtLink></q-item>
+        <q-item clickable v-ripple><q-icon name="phone_iphone" />Item</q-item>
+        <q-item clickable v-ripple><q-icon name="thumb_up" size="md" color="pink-3" />Item1</q-item>
+        <q-item clickable v-ripple><q-icon name="o_thumb_up" size="md" color="teal-14" />Item2</q-item>
+      </q-list>
+    </q-drawer>
+
+    <q-page-container>
+      <q-page class="bg-teal-2">
+        <NuxtPage />
+        <!-- <router-view /> -->
+      </q-page>
+    </q-page-container>
+
+    <q-footer elevated class="bg-grey-8 text-white">
+      <q-toolbar>
+        <q-toolbar-title>
+          <q-avatar>
+            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
+          </q-avatar>
+          <div>Title</div>
+        </q-toolbar-title>
+      </q-toolbar>
+    </q-footer>
+
+  </q-layout>
 </template>
 
 <script setup>
   import { ref } from 'vue'
+
+  //Vypsání použité sady ikon (dá se měnit v "nuxt.config.ts")
+  // import { useQuasar } from 'quasar'
+  // const $q = useQuasar()
+  // console.log($q.iconSet);
+
+  const leftDrawerOpen = ref(false)
+  const rightDrawerOpen = ref(false)
+
+  function toggleLeftDrawer () {
+        leftDrawerOpen.value = !leftDrawerOpen.value
+  }
+
+  function toggleRightDrawer () {
+        rightDrawerOpen.value = !rightDrawerOpen.value
+  }
 
   const runtimeConfig = useRuntimeConfig();
   //const logedUser = useState('logedUser', () => ({email: ''}));
