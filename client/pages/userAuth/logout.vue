@@ -1,6 +1,6 @@
 <template>
     <div>
-      <h1>Logout</h1>
+      <div class="text-h2">Logout</div>
       <pre>{{ data }}</pre>
     </div>
 </template>

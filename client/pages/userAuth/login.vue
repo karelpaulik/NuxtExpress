@@ -1,6 +1,6 @@
 <template>
     <div>
-      <h1>Login</h1>
+      <div class="text-h2">Login</div>
       <input v-model="fd.email" placeholder="email" />
       <input v-model="fd.password" placeholder="password" />
 

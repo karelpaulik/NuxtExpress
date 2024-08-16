@@ -7,13 +7,15 @@
                 <div class="col-xs-12 col-sm-6 col-md-3 text-primary bg-secondary" v-for="file in dataPlayerFiles">
                   <q-card class="fit">
                     <q-card-section>  
-                      <q-img
-                        :src="`${runtimeConfig.public.baseURL}/${file.path}`"
-                      >
-                        <div class="absolute-bottom text-subtitle1 text-center">
-                          {{ file.originalname }}
-                        </div>
-                      </q-img>
+                      <a :href="`${runtimeConfig.public.baseURL}/${file.path}`" target="_blank">
+                        <q-img
+                          :src="`${runtimeConfig.public.baseURL}/${file.path}`"
+                        >
+                          <div class="absolute-bottom text-subtitle1 text-center">
+                            {{ file.originalname }}
+                          </div>
+                        </q-img>
+                      </a>
                     </q-card-section>
                     <q-separator />
                     <q-card-actions>  

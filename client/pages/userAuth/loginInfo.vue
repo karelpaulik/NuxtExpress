@@ -1,6 +1,6 @@
 <template>
     <div>
-      <h1>Login info</h1>
+      <div class="text-h2">Login info</div>
       <button @click="refresh">refresh</button>
       <pre>{{ data }}</pre>
     </div>
