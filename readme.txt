@@ -16,11 +16,12 @@ node:
 Postup spuštění na linux serveru:
 
 git clone xxxxxxxxxx
+cd NuxtExpress  (pozn. Linux rozlišuje velká/malá písmena !!!)
 npm run inst1
 npm run prodbuild
 npm run prodstart
 
-Pozn. Ohledně instalace dependencies existuje i druhá možnost "npm run inst2". To je taková záložní možnost.
+Pozn. Ohledně instalace dependencies existuje i druhá možnost "npm run inst2". Záložní možnost.
 
 Nastavení:
 ..............
@@ -30,7 +31,13 @@ Po "git clone xxx" je nutno nastavit/přidat:
 
 !!!Porty 3000, 5000 nastavit podle skutečnosti
 
+--------------------------------------------------------------------
+Umístění nastavení portů:
+
 Server: server/index.js
 const port = 5000
 
-Client: Def port pro nuxt je 3000. Dá se ale změnit.
+Client: ./package.json  (package.json v rootu, ne v client/..)
+Def port pro nuxt je 3000.
+Produkce - windows: "frontend": "cd client && set port=3001 && node .output/server/index.mjs",
+Produkce - linux:   "frontend": "cd client && export port=3001 && node .output/server/index.mjs",

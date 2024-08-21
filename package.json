@@ -6,12 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "devindex": "concurrently --kill-others \"npm run --prefix ./server noderun\" \"npm run --prefix ./client dev\" ",
-    "inst1": "npm install && echo cd_client  && cd client && echo install_client  && npm install && cd .. && echo cd_server && cd server  && echo install_server && npm instal && echo cd_home && cd ..",
+    "inst1": "npm install && cd client && npm install && cd .. && cd server  && npm instal && cd ..",
     "inst2": "npm install && npm install --prefix ./client && npm install --prefix ./server",
     "prodbuild": "cd client && npm run build && cd ..",
     "backend": "cd server && node index.js",
-    "frontend": "cd client && node .output/server/index.mjs",
-    "prodstart": "concurrently --kill-others \"npm run backend\" \" npm run frontend\" "
+    "frontend": "cd client && export port=3001 && node .output/server/index.mjs",
+    "prodstart": "concurrently --kill-others \"npm run backend\" \" npm run frontendwin\" "
   },
   "keywords": [],
   "author": "",
