@@ -11,7 +11,7 @@
     "prodbuild": "cd client && npm run build && cd ..",
     "backend": "cd server && node index.js",
     "frontend": "cd client && export port=3001 && node .output/server/index.mjs",
-    "prodstart": "concurrently --kill-others \"npm run backend\" \" npm run frontendwin\" "
+    "prodstart": "concurrently --kill-others \"npm run backend\" \" npm run frontend\" "
   },
   "keywords": [],
   "author": "",
