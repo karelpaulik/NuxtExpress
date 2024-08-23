@@ -39,5 +39,5 @@ const port = 5000
 
 Client: ./package.json  (package.json v rootu, ne v client/..)
 Def port pro nuxt je 3000.
-Produkce - windows: "frontend": "cd client && set port=3001 && node .output/server/index.mjs",
-Produkce - linux:   "frontend": "cd client && export port=3001 && node .output/server/index.mjs",
+Produkce - windows: "frontend": "cd client && set PORT=3001 && node .output/server/index.mjs",
+Produkce - linux:   "frontend": "cd client && export PORT=3001 && node .output/server/index.mjs",
