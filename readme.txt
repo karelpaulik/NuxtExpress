@@ -15,22 +15,25 @@ node:
 20.8.2024
 Postup spuštění na linux serveru:
 
+1.
 git clone xxxxxxxxxx
 cd NuxtExpress  (pozn. Linux rozlišuje velká/malá písmena !!!)
 npm run inst1
-npm run prodbuild
-npm run prodstart
 
-Pozn. Ohledně instalace dependencies existuje i druhá možnost "npm run inst2". Záložní možnost.
-
-Nastavení:
-..............
-Po "git clone xxx" je nutno nastavit/přidat:
+2.
+Nastavení
 - server/index.js/corsOptions/origin: http://juliek.eu:3000
 - client/nuxt.confit.ts/runtimeConfig.public.baseURL: http://juliek.eu:5000
 
-!!!Porty 3000, 5000 nastavit podle skutečnosti
+3.
+npm run prodbuild
+npm run prodstart
 
+Pozn. 
+a) Po každé úpravě "client" části je nutno provést: "npm run prodbuild"
+b) Ohledně instalace dependencies existuje i druhá možnost "npm run inst2". Záložní možnost.
+
+!!! Porty 3000, 5000 nastavit podle skutečnosti !!!
 --------------------------------------------------------------------
 Umístění nastavení portů:
 
