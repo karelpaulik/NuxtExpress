@@ -22,8 +22,18 @@ npm run inst1
 
 2.
 Nastavení
-- server/index.js/corsOptions/origin: http://juliek.eu:3000
-- client/nuxt.confit.ts/runtimeConfig.public.baseURL: http://juliek.eu:5000
+a) Bez nginx revers. proxy serveru
+- server/index.js
+const port = 5001;
+origin: ['http://localhost:3000', 'http://juliek.eu:3001'],
+- client/nuxt.config.ts
+runtimeConfig.public.baseURL: 'http://juliek.eu:5001'
+b) nginx jako reverzní proxy-server
+- server/index.js
+const port = 5001;
+origin: ['http://localhost:3000', 'https://juliek.eu:3001'],
+- client/nuxt.config.ts
+runtimeConfig.public.baseURL: 'https://juliek.eu:443/backend/'
 
 3.
 npm run prodbuild
@@ -33,7 +43,7 @@ Pozn.
 a) Po každé úpravě "client" části je nutno provést: "npm run prodbuild"
 b) Ohledně instalace dependencies existuje i druhá možnost "npm run inst2". Záložní možnost.
 
-!!! Porty 3000, 5000 nastavit podle skutečnosti !!!
+!!! Porty 3001, 5001 nastavit podle skutečnosti !!!
 --------------------------------------------------------------------
 Umístění nastavení portů:
 
