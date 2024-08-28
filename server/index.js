@@ -5,10 +5,12 @@ const session = require('express-session');
 //const bcrypt = require('bcrypt'); //bcrypt -> bcryptjs?. With 'bcrypt' must be used further config inside package.json 
 
 const app = express();
-const port = 5000;
+const port = 5000;                  //Takto port nastavený natvrdo.
+//const port = process.env.PORT;    //Tímto vezmu port z "ecosystem.config.js"
 
 //const { User, Player, File } = require('./models/modelsMongoose.js');
 
+//Pozn. origin - zde musí být uvedeno i číslo portu.
 var corsOptions = {
     origin: ['http://localhost:3000', 'http://localhost:5000'],
     credentials: true
