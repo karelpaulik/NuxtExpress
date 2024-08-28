@@ -43,6 +43,10 @@ npm run prodstart
 b) Start za použití pm2 (process manager), další ovládání pm2 viz. package.json
 npm run pm2_start
 
+5. Přidání do linux služeb (aby se nastartovalo i po restartu linux serveru)
+pm2 startup
+pm2 save
+
 Pozn. 
 a) Po každé úpravě "client" části je nutno provést: "npm run prodbuild"
 b) Ohledně instalace dependencies existuje i druhá možnost "npm run inst2". Záložní možnost.
@@ -52,12 +56,18 @@ b) Ohledně instalace dependencies existuje i druhá možnost "npm run inst2". Z
 Umístění nastavení portů:
 
 Server: server/index.js
-const port = 5000
+const port = 5001;              //Takto se pro server bere natvrdo tento port
+nebo:
+const port = process.env.PORT;  //Takto se bere port nastavený v "ecosystem.config.js"
 
-Client: ./package.json  (package.json v rootu, ne v client/..)
+Client:
 Def port pro nuxt je 3000.
+a) Bez použití pm2
+Řídí se proměnnou prostředí: PORT
 Produkce - windows: "frontend": "cd client && set PORT=3001 && node .output/server/index.mjs",
 Produkce - linux:   "frontend": "cd client && export PORT=3001 && node .output/server/index.mjs",
+b) Při použití pm2
+Bere se port ze souboru "ecosystem.config.js"
 --------------------------------------------------------------------
 Alternativa spuštění - přes: pm2
 instalace pm2:
