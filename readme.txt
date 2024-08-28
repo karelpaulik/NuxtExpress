@@ -15,13 +15,12 @@ node:
 20.8.2024
 Postup spuštění na linux serveru:
 
-1.
+1. Stáhnutí, instalace packages
 git clone xxxxxxxxxx
 cd NuxtExpress  (pozn. Linux rozlišuje velká/malá písmena !!!)
 npm run inst1
 
-2.
-Nastavení
+2. Nastavení
 a) Bez nginx revers. proxy serveru
 - server/index.js
 const port = 5001;
@@ -35,9 +34,14 @@ origin: ['http://localhost:3000', 'https://juliek.eu:3001'],
 - client/nuxt.config.ts
 runtimeConfig.public.baseURL: 'https://juliek.eu:443/backend/'
 
-3.
+3. Build
 npm run prodbuild
+
+4. Spuštění
+a) Start bez pm2
 npm run prodstart
+b) Start za použití pm2 (process manager), další ovládání pm2 viz. package.json
+npm run pm2_start
 
 Pozn. 
 a) Po každé úpravě "client" části je nutno provést: "npm run prodbuild"
