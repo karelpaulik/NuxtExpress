@@ -1,8 +1,15 @@
-Pro nastavení nginx jako reverzní proxy server, je nutné nastavit korektně: 
+Pro nastavení nginx jako reverzní proxy server, je nutné nastavit korektně: /etc/nginx/sites-available/default
 
 Pozor hlavní rozdíl mezi: location / vs. location /backend/
 proxy_pass http://localhost:3001;  !!! Zde může/nemusí být lomítko na konci
 proxy_pass http://localhost:5001/; !!! Zde musí být lomítko na konci
+
+Ovládání služeb v linuxu:
+systemctl stop nginx
+systemctl start nginx
+systemctl restart nginx		(tj. stop + start)
+systemctl reload nginx		(tj. reloads its configuration files and applies any changes without stopping the service)
+systemctl status nginx
 
 /etc/nginx/sites-available/default
 ..................................
