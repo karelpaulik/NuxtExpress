@@ -33,7 +33,12 @@ const port = 5001;
 origin: ['http://localhost:3000', 'https://juliek.eu:3001'],
 - client/nuxt.config.ts
 runtimeConfig.public.baseURL: 'https://juliek.eu:443/backend/'
-Pozn: Nastavení nginx proxy-serveru: nginx_revers_proxy-readme.txt
+
+Pozn: 
+Nastavení nginx proxy-serveru: viz.
+- nginx_revers_proxy-readme.txt
+Reload nginx:  
+- systemctl reload nginx
 
 3. Build
 npm run prodbuild
