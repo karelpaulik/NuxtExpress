@@ -41,6 +41,7 @@ npm run prodbuild
 a) Start bez pm2
 npm run prodstart
 b) Start za použití pm2 (process manager), další ovládání pm2 viz. package.json
+(Pokud by pm2 neblylo nainstalováno, pak instalace: "npm install pm2@latest -g")
 npm run pm2_start
 
 5. Přidání do linux služeb (aby se nastartovalo i po restartu linux serveru)
