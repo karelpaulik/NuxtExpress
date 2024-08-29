@@ -1,0 +1,51 @@
+Postman:
+-------------------------------
+1. Create
+POST
+...........
+localhost:5000/api/book
+body/raw/JSON:
+{
+    "title": "Konstruktérské směrnice",
+    "author": "Jiří Střední",
+    "year": 2024,
+    "isActive": true,
+    "keyWord": ["Design", "Směrnice"]
+}
+Return body:
+{
+    "title": "Konstruktérské směrnice",
+    "author": "Jiří Střední",
+    "year": 2024,
+    "isActive": true,
+    "keyWord": [
+        "Design",
+        "Směrnice"
+    ],
+    "_id": "66d06ff5ea96c361f2205b2a",
+    "__v": 0
+}
+
+2. Read
+GET
+..........
+localhost:5000/api/book
+localhost:5000/api/book/66d06ff5ea96c361f2205b2a
+
+3. Update
+PUT
+..........
+localhost:5000/api/book/66d06ff5ea96c361f2205b2a
+body:
+{
+    "title": "Konstruktérské směrnice",
+    "author": "Karel Malý",
+    "year": 2024,
+    "isActive": true,
+    "keyWord": ["Design", "Směrnice"]
+}
+
+4. Delete
+DELETE
+...........
+localhost:5000/api/book/66d06ff5ea96c361f2205b2a

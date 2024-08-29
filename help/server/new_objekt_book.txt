@@ -1,0 +1,80 @@
+NuxtExpress - přidání nového objektu: book
+------------------------------------
+Applicatin part: server
+---------------------------------------------------------------------
+1. server/models/book.js
+---------------------------------------------------------------------
+const mongoose = require("mongoose");
+const bookSchema = new mongoose.Schema({
+    title: String,
+    author: String,
+    year: Number,
+    isActive: Boolean,
+    keyWord: [String]
+}, {});
+const Book = mongoose.model('Book', bookSchema)
+module.exports = { Book }
+---------------------------------------------------------------------
+2. server/models/modelsMongoose.js
+---------------------------------------------------------------------
+const { Book } = require('./book.js')
+module.exports = { Book }
+---------------------------------------------------------------------
+3. server/modules/book.js
+---------------------------------------------------------------------
+module.exports = function(app) {
+	const { Book } = require('../models/modelsMongoose.js');
+	
+    app.post('/api/book', async(req, res) => {        
+        const b = await Book.create(req.body);
+        res.send(b);
+    });
+	
+    app.get('/api/book', async(req, res) => {
+        const b = await Book.find();
+        res.send(b);
+    });
+	
+    app.get('/api/book/:id', async(req, res) => {
+        const b = await Book.findOne({_id: req.params.id});
+        res.send(b);
+    });
+	
+    //Funguje
+    // app.put('/api/book/:id', async(req, res) => {
+    //     const filter = {_id: req.params.id};
+    //     const update = req.body;
+    //     const b = await Book.findOneAndUpdate(filter, update, {
+    //         new: true
+    //     });
+    //     res.send(b);
+    // });
+
+    //Funguje
+    // app.put('/api/book/:id', async(req, res) => {
+    //     const b = await Book.replaceOne({_id: req.params.id}, req.body);
+    //     res.send(b);
+    // });
+
+    app.put('/api/book/:id', async(req, res) => {
+        const b = await Book.findOne({_id: req.params.id});
+        b.overwrite(req.body);  //b = req.body;   nefunguje
+        await b.save();
+        res.send(b);
+    });
+
+    app.delete('/api/book', async(req, res) => {
+        await User.deleteMany();
+    });
+	
+    app.delete('/api/book/:id', async(req, res) => {
+        const b = await Book.findOne({_id: req.params.id});
+        await b.deleteOne();
+        res.send(b);
+    });
+}
+---------------------------------------------------------------------
+4. server/index.js
+---------------------------------------------------------------------
+require('./modules/book.js')(app)
+---------------------------------------------------------------------
