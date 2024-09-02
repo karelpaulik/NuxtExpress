@@ -17,6 +17,13 @@ Postup spuštění na linux serveru:
 
 1. Stáhnutí, instalace packages
 git clone xxxxxxxxxx
+(Při chybě "unable to get local issuer certificate" pomohlo: "git config --global http.sslBackend schannel"
+Pozn:
+git config -l
+git config -l --global
+git config -l --system
+git config -l --local
+)
 cd NuxtExpress  (pozn. Linux rozlišuje velká/malá písmena !!!)
 npm run inst1
 
