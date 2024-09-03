@@ -40,8 +40,6 @@
     <q-drawer show-if-above v-model="leftDrawerOpen" side="left" bordered class="bg-grey-2">
       <q-list bordered separator>
         <q-item clickable v-ripple><NuxtLink to="/">Home page</NuxtLink></q-item>
-        <q-item clickable v-ripple><NuxtLink to="/images">Images</NuxtLink></q-item>
-        <q-item clickable v-ripple><NuxtLink to="/contacts">Contacts</NuxtLink></q-item>
         <q-item clickable v-ripple><q-icon name="phone_iphone" />Item</q-item>
         <q-item clickable v-ripple><q-icon name="thumb_up" size="md" color="pink-3" />Item1</q-item>
         <q-item clickable v-ripple><q-icon name="o_thumb_up" size="md" color="teal-14" />Item2</q-item>

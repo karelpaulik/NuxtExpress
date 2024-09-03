@@ -1,6 +1,6 @@
 module.exports = function(app) {
 
-    const bcrypt = require('bcrypt'); //bcrypt -> bcryptjs?. With 'bcrypt' must be used further config inside package.json 
+    const bcryptjs = require('bcryptjs'); //bcrypt -> bcryptjs?. With 'bcrypt' must be used further config inside package.json 
     const { User } = require('../models/modelsMongoose.js');
 
     app.post('/api/user', async(req, res) => {
@@ -10,7 +10,7 @@ module.exports = function(app) {
             .then( async() => {
                 const p = await User.create({
                     email: req.body.email,
-                    passwordHash: bcrypt.hashSync(req.body.password, 10),
+                    passwordHash: bcryptjs.hashSync(req.body.password, 10),
                     isAdmin: req.body.isAdmin
                 });
                 //const p = await User.create(req.body);

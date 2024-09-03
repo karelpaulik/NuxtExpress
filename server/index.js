@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
-//const bcrypt = require('bcrypt'); //bcrypt -> bcryptjs?. With 'bcrypt' must be used further config inside package.json 
+//const bcryptjs = require('bcryptjs'); //bcrypt -> bcryptjs?. With 'bcrypt' must be used further config inside package.json 
 
 const app = express();
 const port = 5000;                  //Takto port nastavený natvrdo.

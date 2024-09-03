@@ -1,6 +1,6 @@
 module.exports = function(app) {
 
-    const bcrypt = require('bcrypt'); //bcrypt -> bcryptjs?. With 'bcrypt' must be used further config inside package.json 
+    const bcryptjs = require('bcryptjs'); //bcrypt -> bcryptjs?. With 'bcrypt' must be used further config inside package.json 
     const { User } = require('../models/modelsMongoose.js');
 
 //----------Authentification------------------------------------------------------------------------
@@ -38,7 +38,7 @@ app.post('/api/auth', async(req, res) => {
     sessionUser.email = cleanDefnUser.email;
     sessionUser.isAdmin = cleanDefnUser.isAdmin;
 
-    if (bcrypt.compareSync(req.body.password, u.passwordHash))  {
+    if (bcryptjs.compareSync(req.body.password, u.passwordHash))  {
         //req.session.email = req.body.email
         req.session.user = sessionUser;
         req.session.save(function (err) {
