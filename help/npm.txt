@@ -1,0 +1,4 @@
+npm config
+npm config ls
+npm config ls -l
+npm config edit
