@@ -17,7 +17,8 @@ Postup spuštění na linux serveru:
 
 1. Stáhnutí, instalace packages
 git clone xxxxxxxxxx
-(Při chybě "unable to get local issuer certificate" pomohlo: "git config --global http.sslBackend schannel"
+(Při chybě "unable to get local issuer certificate" pomohlo:
+"git config --global http.sslBackend schannel" nebo "git config --global http.sslverify false" (jedno z toho, při zkoušce funfovalo obojí)
 Pozn:
 git config -l
 git config -l --global
