@@ -1,0 +1,4 @@
+git config -l
+
+git config --global --edit                      (Otevře se git config global soubor pro editaci)
+git config --global http.sslBackend schannel    (Editace jedné proměnné)
