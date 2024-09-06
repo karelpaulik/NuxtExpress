@@ -40,10 +40,10 @@
 
   //Definice sloupců tabulky
   const columns=[
-            {name: 'prvni', align: 'center', label: 'prvni sloupec', field: '_id', sortable: 'true'},
-            {name: 'druhy', align: 'center', label: 'druhy sloupec', field: 'title', sortable: 'true'},
-            {name: 'treti', align: 'center', label: 'treti sloupec', field: 'author', sortable: 'true'},
-            {name: 'actions', align: 'center', label: 'ctvrty sloupec', field: 'actions', sortable: 'true'},
+            {name: 'prvni', align: 'center', label: 'prvni sloupec', field: '_id', sortable: true},
+            {name: 'druhy', align: 'center', label: 'druhy sloupec', field: 'title', sortable: true},
+            {name: 'treti', align: 'center', label: 'treti sloupec', field: 'author', sortable: true},
+            {name: 'actions', align: 'center', label: 'ctvrty sloupec', field: 'actions', sortable: true},
           ]
   
   function fceAkceSeZaznamem(row) {
