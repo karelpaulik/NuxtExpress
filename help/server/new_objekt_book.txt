@@ -24,9 +24,11 @@ module.exports = { Book }
 ---------------------------------------------------------------------
 module.exports = function(app) {
 	const { Book } = require('../models/modelsMongoose.js');
-	
-    app.post('/api/book', async(req, res) => {        
-        const b = await Book.create(req.body);
+
+    app.post('/api/book', async(req, res) => {     
+        const x = req.body;
+        delete x._id;   //Tímto mažu _id (pokud existuje). Nutné, když bych vytvářel záznam z již existujícího záznamu.
+        const b = await Book.create(x);
         res.send(b);
     });
 	

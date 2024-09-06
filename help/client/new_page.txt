@@ -1,0 +1,27 @@
+NuxtExpress - přidání nového stránky
+------------------------------------
+Applicatin part: client
+---------------------------------------------------------------------
+1. client/book/book-[[id]].vue
+   client/book/bookList.vue
+---------------------------------------------------------------------
+2. client/composables/book.ts
+---------------------------------------------------------------------
+3. client/app.vue
+   ..............
+Samotné routy:
+   <q-route-tab to="/book/book-" label="Book" />
+   <q-route-tab to="/book/bookList" label="BookList" />
+
+Pro dropdown:
+   <q-btn-dropdown no-caps auto-close stretch flat label="Book">
+     <q-list separator>
+       <q-item>
+         <q-route-tab to="/book/book-" label="Book" />
+       </q-item>
+       <q-item>
+         <q-route-tab to="/book/bookList" label="BookList" />
+       </q-item>
+     </q-list>
+   </q-btn-dropdown>
+---------------------------------------------------------------------
