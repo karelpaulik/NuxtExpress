@@ -1,0 +1,6 @@
+Přídání atributu do book
+------------------------
+Nutno zohlednit v následujících souborech:
+1. server/models/book.js
+2. client/pages/book/book-[[]].vue
+3. client/pages/book/bookList.vue
