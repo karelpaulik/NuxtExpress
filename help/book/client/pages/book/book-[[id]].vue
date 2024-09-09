@@ -10,6 +10,7 @@
             <input v-model="dataBook.title" placeholder="title" type="text"/>
             <input v-model="dataBook.author" placeholder="author" />
             <input v-model="dataBook.year" placeholder="year" type="number"/>
+            <FDate v-model:oDate="dataBook.createDate" /><!-- Extra component for Date -->
             <div><q-checkbox v-model="dataBook.isActive" label="isActive" /></div>
             <q-checkbox v-model="dataBook.keyWord" val="Drama" label="Drama" />
             <q-checkbox v-model="dataBook.keyWord" val="Komedie" label="Komedie" />
@@ -28,6 +29,7 @@
     title: '',
     author: '',
     year: null,
+    createDate: null,
     isActive: true,
     keyWord: []
   })

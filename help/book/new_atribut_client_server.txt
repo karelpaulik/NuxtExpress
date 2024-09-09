@@ -4,3 +4,10 @@ Nutno zohlednit v následujících souborech:
 1. server/models/book.js
 2. client/pages/book/book-[[]].vue
 3. client/pages/book/bookList.vue
+
+Pozor - pokud se přidává atribut typu "Date", pak je nutné provádět konverzi datumu mezi "mongo" a "javascript clientem". Každý používá jiný formát.  
+Nejvhodnější je pak použít vlastní komponentu pro datum "FDate" (formated date), kde se konverze provádí.
+Aby tato komponenta funguvala, je nutné min. vue verze 3.4 (zde definován: "defineModel")
+Jen pro info - konverze:
+new Date(oDate.value).toISOString().split('T')[0];  "1999-06-02T00:00:00.000Z" -> "1999-06-02"
+new Date(newValue).toISOString();                   "1999-06-02" -> "1999-06-02T00:00:00.000Z"

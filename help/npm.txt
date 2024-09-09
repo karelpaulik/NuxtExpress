@@ -1,4 +1,113 @@
-npm config
+node -v				Výpis verze "node"
+npm -v				Výpis verze "npm"
+
+--------------------------------------------------
+NPM KONFIGURACE
+npm config			(Stručný návod, jak používat "npm config xxx")
 npm config ls
-npm config ls -l
-npm config edit
+npm config ls -l	(Plný výpis configu)
+npm config edit		(Otevření configu v pozn. bloku pro editaci)
+
+INSTALACE PACKAGES
+.............................
+npm install		(nainstaluje package uvedené v package.json. Např. po git clone ....)
+npm install packageName
+npm install packageName@latest
+npm install -g nodemon
+
+INFO O NAINSTALOVANÝCH PACKAGES
+..............................
+npm list
+npm list -g
+
+INFO O VERZÍCH DOSTUPNÉHO PACKAGE
+.................................
+npm view vue versions	(view vs list: stejné)
+npm list vue versions
+
+SPUŠTĚNÍ SKRIPTU UVEDENÉHO V "package.json"
+npm run scriptName
+npm run 				(výpis dostupných skriptů)
+-----------------------------------------------------
+DVĚ MOŽNOSTI INSTALCE NODEMON
+
+1. 
+cmd spustit as admin a nainstalovat nodemon globálně:
+...........
+npm install -g nodemon
+nodemon index.js
+
+....................................................................
+2.
+cmd spuštěné jako normální uživatel
+..........
+npm install nodemon --save-dev		(zřejmě by fungovalo i: npm install nodemon)
+
+Dále úprava souboru "package.json": (doplnění řádku: "start": "nodemon index.js")
+...........
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+
+spuštění:
+npm start
+-------------------------------------------------------------------
+Založení projektu "express" frameworku a první kód v express
+.................
+mkdir node-projekt
+cd node-projekt
+npm init --yes		nebo: npm init -y	(provede to stejné. Tzn. --yes = -y)
+npm install express
+
+První kód v EXPRESSU:
+index.js
+...................
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+});
+
+app.get('/api', (req, res) => {
+	res.send([10,20,30]);
+});
+
+app.get('/reverse/:text', (req, res) => {
+	res.send([...req.params.text].reverse().join(''));
+});
+
+app.listen(3000, () => console.log('Listening on port 3000...'));
+.................
+spuštění:
+node index.js
+-------------------------------------------------------------------
+index.js - implementace POST
+
+Pozn. Nutno řádek "app.use(express.json());". Je to middleware,
+jinak by nefungovalo "req.body.???"
+..................................
+const express = require('express');
+const app = express();
+
+app.use(express.json());
+
+const movies = [
+    { id: 1, name: "Kill Bill", year: 2003 },
+    { id: 2, name: "Kill Bill 2", year: 2004 },
+    { id: 3, name: "Star Wars IV", year: 1976 },
+    { id: 4, name: "Star Wars V", year: 1980 }
+];
+
+app.post("/api/movies", (req,res) => {
+	const movie = {
+		id: movies.length +1,
+		name: req.body.name,
+		year: req.body.year
+	};
+	movies.push(movie);
+	res.send(movie);
+});
+
+app.listen(3000, () => console.log('Listening on port 3000...'));
