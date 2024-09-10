@@ -17,16 +17,31 @@ Postup spuštění na linux serveru:
 
 1. Stáhnutí, instalace packages
 git clone xxxxxxxxxx
-(Při chybě "unable to get local issuer certificate" pomohlo:
-"git config --global http.sslBackend schannel" nebo "git config --global http.sslverify false" (jedno z toho, při zkoušce funfovalo obojí)
-Pozn:
-git config -l
-git config -l --global
-git config -l --system
-git config -l --local
+(
+    Při chybě "unable to get local issuer certificate" pomohlo:
+    "git config --global http.sslBackend schannel" nebo "git config --global http.sslverify false" (jedno z toho, při zkoušce funfovalo obojí)
+    Pozn:
+    git config -l
+    git config -l --global
+    git config -l --system
+    git config -l --local
 )
 cd NuxtExpress  (pozn. Linux rozlišuje velká/malá písmena !!!)
 npm run inst1
+(
+    Při problémech s instalací tzn. uvnitř je "npm install" je vhodné:
+    npm config set strict-ssl false
+    Pokud toto samotné nestačí, může být problém pro konkr. package v nastavení sítě - kde ???
+    Řešení:
+    1.Možnost
+    - Připojit se dočasně na jinou síť (např. přes telefon) a dát "npm install"
+    2.Možnost
+    - Použít lokální package pro instalaci
+        Tj. na jiném funkčním PC vytvořit lokální inst balíček:
+        1. npm pack nodemon
+        2. nakopírovat na problémová PC
+        3. npm install ./nodemon-3.1.4.tgz
+)
 
 2. Nastavení
 a) Bez nginx revers. proxy serveru

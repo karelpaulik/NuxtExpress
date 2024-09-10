@@ -1,0 +1,87 @@
+Důležité
+npm help
+npm install <package_name>
+npm uninstall <package_name>
+npm view <package_name>
+npm list
+npm list -g
+
+npm outdated
+npm update <package_name>
+
+npm run	(list available scripts to run)
+
+npm config list
+
+npm cache clean --force
+npm cache verify
+--------------------------------------------------------------------
+npm help
+npm help install	Help příkazu: install
+--------------------------------------------------------------------
+List packages and their dependencies of th current project as a tree structure:
+npm list	(stejné jako: npm ls)
+npm list --depth=0
+
+listing packages in depencencies:
+npm list --prod
+
+listing packages in devDependencies:
+npm list --dev
+
+listing packages in the global packages:
+npm list --global	(stejné jako: npm list -g)
+
+list in json format:
+npm list --json
+--------------------------------------------------------------------
+Data about a package:
+
+npm view express
+--------------------------------------------------------------------
+Instalace packages:
+
+npm install <package_name>
+npm install <package_name> --save-dev		install a new package as a development dependency.
+npm install <package_name> -g			install a package globally.
+
+Pozn:
+npm install <package_name> -g
+.............................
+Toto nainstaluje package globálně, ale pokud nejsem přihlášený jako admin, tak nejde použít:
+nodemon index.js
+--------------------------------------------------------------------
+UnInstalace packages:
+
+npm uninstall <package_name>
+npm uninstall <package_name> --save-dev
+npm uninstall <package_name> -g
+---------------------------------------------------------------------
+najet do složky projektu
+npm outdated
+npm update <package_name>		Updatuje konkrétní package
+npm update 				Updatuje všechny packages
+
+npm outdated -g
+npm update -g <package name>
+npm update -g				Updatuje všechny globální package
+
+---------------------------------------------------------------------
+---------------------------------------------
+---------------------------------------------
+---------------------------------------------
+Instalace konkrétní verze:
+npm install bootstrap@5.1.0
+
+---------------------------------------------
+Dále existuje:
+npm view <package_name> dist-tags
+npm view <package_name>
+
+Např: npm view vue-router dist-tags
+  latest: '4.1.5',
+  next: '4.0.13',
+  edge: '4.1.0-beta.2',
+  legacy: '3.6.5'
+
+

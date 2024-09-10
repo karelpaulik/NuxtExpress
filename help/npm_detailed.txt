@@ -1,19 +1,40 @@
 node -v				Výpis verze "node"
 npm -v				Výpis verze "npm"
 
+npm install -g npm@latest   (npm aktualizace na poslední verzi)
+
+npm help              (nápověda k nápovědě)
+npm <command> --help  (nápověda k příkazu)
 --------------------------------------------------
 NPM KONFIGURACE
-npm config			(Stručný návod, jak používat "npm config xxx")
+npm config			(Stručný návod, jak používat "npm config xxx", dála vypíše sesty na .npmrc lokální/globální)
+npm config -h   (help)
 npm config ls
 npm config ls -l	(Plný výpis configu)
 npm config edit		(Otevření configu v pozn. bloku pro editaci)
+npm config get proxy
+npm config set proxy http://proxy_host:port               (pro http)
+npm config set https-proxy https://proxy.company.com:8080 (pro https)
+npm config delete proxy
+
+Konfigurace je uložená v souboru/souborech .npmrc
+
+npm inicializace
+...............
+npm init --yes
 
 INSTALACE PACKAGES
 .............................
 npm install		(nainstaluje package uvedené v package.json. Např. po git clone ....)
 npm install packageName
+npm uninstall packageName
 npm install packageName@latest
 npm install -g nodemon
+
+npm search nodemon  (vyhledá balíček a informace o něm)
+npm outdated        (seznam balíčků k aktualizaci)
+npm update packageName  (aktualizuje daný balíček)
+npm update              (aktualizuje všechny balíčky)
 
 INFO O NAINSTALOVANÝCH PACKAGES
 ..............................
@@ -28,6 +49,37 @@ npm list vue versions
 SPUŠTĚNÍ SKRIPTU UVEDENÉHO V "package.json"
 npm run scriptName
 npm run 				(výpis dostupných skriptů)
+
+STAŽENÍ PACKAGE BEZ JEHO INSTALACE A NÁSLEDNÁ INSTALACE Z LOKÁLU
+................................................................
+(hodí se, když nastavení sítě z nějakého důvodu nedovoluje nainstalovat balíček)
+npm pack nodemon                  (vytvoří v aktuálním adresáři soubor: nodemon-3.1.4.tgz)
+npm install ./nodemon-3.1.4.tgz   (nainstaluje nodemon z LOKÁLU)
+Pozn (package.json):
+"dependencies": {
+    "nodemon": "file:nodemon-3.1.4.tgz"
+Pozn (nepoužil jsem) - reinstalace dependencies. 
+Reinstall dependencies (if you copied node_modules): If you copied the node_modules folder and package-lock.json, you may run:
+This command installs all dependencies as per the package-lock.json file without requiring an internet connection.
+npm ci
+
+PRÁCE S CACHE
+.................
+npm cache clear -f
+npm cache verify
+
+PROBLÉMY:
+..................................
+UNABLE_TO_VERIFY_LEAF_SIGNATURE
+Řešení:
+npm config set strict-ssl false
+
+Někdy může s problémy pomoci smazání: C:\Users\karel.paulik\.npmrc  (lokální úprava konfigurace)
+Delete node_modules + "npm install"
+Delete node_modules + "npm init --yes" + "npm install"
+???Delete package-lock.json + new install
+npm doctor
+netsh winhttp show proxy  (Zjištění, jestli je pc za proxy serverem nebo ne)
 -----------------------------------------------------
 DVĚ MOŽNOSTI INSTALCE NODEMON
 
