@@ -24,7 +24,7 @@
       //   return ''
       // }
       // ekvivalent:
-      return (oDate.value ? new Date(oDate.value).toISOString().split('T')[0] : '';
+      return (oDate.value) ? new Date(oDate.value).toISOString().split('T')[0] : '';
     },
     set(newValue) {
       // Convert input value to ISO format
