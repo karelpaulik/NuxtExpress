@@ -25,3 +25,8 @@ Pro dropdown:
      </q-list>
    </q-btn-dropdown>
 ---------------------------------------------------------------------
+4. Pokud existuje vlastnost typu "Date", tak musí v "client/components" existovat komponenta "FDate".
+   Tato komponenta se pak použije v:
+   - client/book/book-[[id]].vue
+   - client/book/bookList.vue
+   !!! Vue verze musí být min: 3.4 (kvůli: defineModels)

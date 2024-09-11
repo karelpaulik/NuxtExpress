@@ -16,13 +16,20 @@
   const fDate = computed({
     get() {
       // Convert ISO date to YYYY-MM-DD format for input field
-      //Both folowing does the same.
-      return new Date(oDate.value).toISOString().split('T')[0];
-      //return new Date(oDate.value).toLocaleDateString('en-CA');
+      //return new Date(oDate.value).toISOString().split('T')[0];
+
+      // if (oDate.value) {
+      //   return new Date(oDate.value).toISOString().split('T')[0];
+      // } else {
+      //   return ''
+      // }
+      // ekvivalent:
+      return (oDate.value ? new Date(oDate.value).toISOString().split('T')[0] : '';
     },
     set(newValue) {
       // Convert input value to ISO format
-      oDate.value = new Date(newValue).toISOString();
+      //oDate.value = new Date(newValue).toISOString();
+      oDate.value = (newValue) ? new Date(newValue).toISOString() : oDate.value;
     }
   });
 
