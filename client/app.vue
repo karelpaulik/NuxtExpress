@@ -153,11 +153,7 @@
         </q-item>
       </q-list>
 
-      <div class="text-h4 text-weight-bolder">Nadpis</div>
-
-      <div style="max-width: 300px;">
-        <q-input v-model="text" label="input"/>
-      </div>
+      <div class="text-h4 text-weight-bold">Nadpis</div>
 
       <q-uploader
       url="http://localhost:4444/upload"
