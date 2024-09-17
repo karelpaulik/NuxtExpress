@@ -53,6 +53,8 @@ const columns=[
   {name: 'author', align: 'center', label: 'Autor', field: 'author', sortable: true},
   {name: 'createDate', align: 'center', label: 'Datum vytvoření', field: 'createDate', sortable: true, 
    format: val => (val) ? new Date(val).toLocaleDateString(): ''},  //if: createDate exist then format this date, else: print empty string
+  {name: 'keyWord', align: 'center', label: 'Kl. slova', field: 'keyWord', sortable: true,
+   format: val => val.map(item => item + ' ' + item).join(', ')}, //Formátuj každý item pole, a pak zobraz oddělené čárkou  
   {name: 'actions', align: 'center', label: 'Akce', field: 'actions', sortable: true},
 ]
 
