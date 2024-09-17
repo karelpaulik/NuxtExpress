@@ -2,8 +2,8 @@ NuxtExpress - přidání nového stránky
 ------------------------------------
 Applicatin part: client
 ---------------------------------------------------------------------
-1. client/book/book-[[id]].vue
-   client/book/bookList.vue
+1. client/pages/book/book-[[id]].vue
+   client/pages/book/bookList.vue
 ---------------------------------------------------------------------
 2. client/composables/book.ts
 ---------------------------------------------------------------------
