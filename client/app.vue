@@ -2,13 +2,16 @@
   <q-layout view="hHh LpR fff">
     <!-- Header -->
     <q-header elevated class="bg-grey-5 text-black" height-hint="98">
-      <q-toolbar align="center">
+      <q-toolbar>
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
-        <q-toolbar-title>
+        <q-toolbar-title align="left">
           <q-avatar size="64px">
             <img src="tygr.jpg" />
           </q-avatar>
           Web page title
+        </q-toolbar-title>
+        <q-toolbar-title align="right" ref="tbElement">
+          Second web page title
         </q-toolbar-title>
         <q-tabs align="center" no-caps>
           <q-route-tab v-if="!logedUser.email" to="/userAuth/login" label="Login" />
@@ -20,7 +23,7 @@
       </q-toolbar>
       
       <!-- Tabs -->
-      <q-tabs align="center" no-caps>
+      <q-tabs align="left" no-caps>
         <q-route-tab v-for="tab in tabs" :key="tab.label" :to="tab.to" :label="tab.label" />
         <a :href="`${runtimeConfig.public.baseURL}/expresslogin`">expressjs login - zadní vrátka</a>
         
@@ -84,7 +87,7 @@
 
     <!-- Page Content -->
     <q-page-container>
-      <q-page class="bg-grey-6">
+      <q-page class="bg-grey-6 q-pa-sm">
         <NuxtPage />
         <!-- <router-view /> -->
       </q-page>
@@ -104,6 +107,20 @@
 
 <script setup>
 import { ref } from 'vue';
+
+//Ukázka, jak se v quasaru pracuje s "ref" u komponenty
+//  !!! quasar na rozdíl od vue používá navíc: .$el
+const tbElement = ref(null)
+onMounted(() => {
+  const myElement = tbElement.value.$el;  //quasar componenta, např: <q-toolbar-title ref="tbElement">
+  //const myElement = tbElement.value;    //vue element, např.    <div ref="tbElement">
+  console.log(myElement);
+  console.log(myElement.parentElement);
+  const parentHeight = myElement.parentElement.offsetHeight;  //Pozn. myElement.parentElement.style.height .. není nastaveno. offsetHeight zohledňuje velikost, která je dána podelementem, tj. <q-avatar size="64px">
+  console.log('parentHeight: ', parentHeight);
+  myElement.style.height=`${parentHeight / 2}px`;
+  myElement.style.color='white';
+});
 
 //Vypsání použité sady ikon (dá se měnit v "nuxt.config.ts")
 // import { useQuasar } from 'quasar'
