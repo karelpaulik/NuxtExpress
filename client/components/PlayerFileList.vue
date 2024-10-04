@@ -1,5 +1,6 @@
 <template>
     <div>
+      <!-- <pre style="font-size: smaller">{{ dataPlayerFiles }}</pre> -->
         <!-- <div v-if="dataPlayer.files"> -->
         <div v-if="dataPlayerFiles">
           <div class="q-pa-xs">
@@ -41,6 +42,9 @@
     playerFiles: Object
   })
 
+  //Component emit events
+  const emit = defineEmits(['update'])
+
   //Data for HTML rendering
   const dataPlayerFiles=ref(null)
 
@@ -52,6 +56,11 @@
     () => {
       dataPlayerFiles.value = props.playerFiles
   })
+
+  //Hlídání změn "dataPlayerFiles"
+  watch( dataPlayerFiles, () => {
+    emit ('update', dataPlayerFiles.value)
+  } )
 
   //--------------------------------------------------------------function definition------------------------------------------------
   //Smazání souboru

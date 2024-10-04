@@ -26,7 +26,8 @@
         <PlayerFileList :playerId="rec._id" :playerFiles="rec.files"/>
 
         <PlayerDelBtn :playerToDel="rec._id" @response="async() => {await fceReadAllPlayer()}" />
-        <q-btn color="primary" @click="async() => { await navigateTo('/player/player-' + rec._id) }" label="Move to record" />
+        <q-btn label="Move to record" color="primary" @click="async() => { await navigateTo('/player/player-' + rec._id) }" />
+        <PlayerDialogBtn :playerId="rec._id" @response="async() => {await fceReadAllPlayer()}" />
         <hr>
       </div>
     </div>

@@ -1,7 +1,8 @@
 <template>
     <div>
+      <!-- <pre style="font-size: smaller">{{ dataPlayerFiles }}</pre> -->
         <!-- Zde předávám i "playerId" kvůli mazání souborů - propagace smazání souboru i do "Player" -->
-        <PlayerFileList :playerId="playerId" :playerFiles="dataPlayerFiles"/>
+        <PlayerFileList :playerId="playerId" :playerFiles="dataPlayerFiles"  @update="(x) => { dataPlayerFiles = x }"/>
 
         <!-- <div v-if="dataPlayerFiles"> -->
         <q-uploader
@@ -19,7 +20,7 @@
 </template>
   
 <script setup>
-  import { ref, reactive }  from 'vue';
+  import { ref, watch }  from 'vue';
   const runtimeConfig = useRuntimeConfig();
   const uploader = ref(null)    //Toto definováno, abych mohl po odeslání souborů na servery tyto soubory odstranit z uploaderu.
 
@@ -28,8 +29,17 @@
     playerId: String
   })
 
+  //Component emit events
+  const emit = defineEmits(['update'])
+
   //Data for HTML rendering
   const dataPlayerFiles=ref(null)
+
+  //Hlídání změn "dataPlayerFiles"
+  watch( dataPlayerFiles,
+    () => {
+      emit ('update', dataPlayerFiles.value)
+  })
 
   await fceGetPlayerFiles()
 
