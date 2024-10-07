@@ -1,11 +1,13 @@
 <template>
     <div>
         <!-- <pre style="font-size: smaller">{{ dataPlayer }}</pre> -->
-        <q-btn color="primary" @click="fceCreatePlayer" label="Create new record" />
-        <q-btn color="primary" @click="fceUpdatePlayer" label="Update record" />
-        <PlayerDelBtn :playerToDel="dataPlayer._id" @response="() => { navigateTo('/player/playerList') }" />
-        <q-btn color="primary" label="Update and close" @click="() => { fceUpdatePlayer(); emit ('closeAndUpdate') }" />
-        <q-btn color="primary" label="Close not update" @click="() => { console.log('begin'); emit('closeNotUpdate'); console.log('end') }" />
+        <div class="bg-grey-4" >
+          <q-btn @click="fceCreatePlayer" label="Create new record" no-caps flat />
+          <q-btn @click="fceUpdatePlayer" label="Update record" no-caps flat />
+          <PlayerDelBtn :playerToDel="dataPlayer._id" @response="() => { navigateTo('/player/playerList') }" />
+          <q-btn label="Update and close" @click="() => { fceUpdatePlayer(); emit ('closeAndUpdate') }" no-caps flat />
+          <q-btn label="Close not update" @click="() => { console.log('begin'); emit('closeNotUpdate'); console.log('end') }" no-caps flat />
+        </div>
 
         <form @submit.prevent="send">
           <q-card>
@@ -79,16 +81,14 @@
 
   //Vytvoření nového záznamu
   async function fceCreatePlayer() {
-    //dataPlayer.value = await usePostPlayer(dataPlayer.value)  //Nepoužívám, protože se nové "_id" nepřepíše do web. adresy.
-    const x = await usePostPlayer(dataPlayer.value)
-    await navigateTo('/player/player-' + x._id)
+    dataPlayer.value = await usePostPlayer(dataPlayer.value)
+    // const x = await usePostPlayer(dataPlayer.value)
+    // await navigateTo('/player/player-' + x._id)
   }
 
   //Update existujícího záznamu
   async function fceUpdatePlayer() {
-    console.log('aaa')
     dataPlayer.value = await usePutPlayer(dataPlayer.value._id, dataPlayer.value)
-    console.log('bbb')
   }
 
 </script>

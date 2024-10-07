@@ -1,6 +1,6 @@
 <template>
     <div style="display: inline">
-        <q-btn color="primary" @click="dialogPlayer = true" label="Player dialog" />
+        <q-btn @click="dialogPlayer = true" :label="componentLabel" no-caps flat />
         <q-dialog v-model="dialogPlayer" persistent>
           <q-card style="max-width: 1000px; width: 100%;">
             <q-card-section>
@@ -16,7 +16,8 @@
 
     //Component properties
     const props = defineProps({
-        playerId: String
+        playerId: String,
+        componentLabel: String
     })
 
     //Component emit events
